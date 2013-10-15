@@ -1,0 +1,127 @@
+body
+{
+  background: #f6f6f2;
+  background: white;
+  font-family: 'Museo Sans Rounded', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: normal;
+}
+
+*
+{
+  text-rendering: optimizeLegibility;
+}
+
+b
+{
+  font-weight: 700;
+  color: #046;
+}
+
+.slide
+{
+  background: #f6f6f2;
+  box-sizing: border-box;
+  padding: 40px;
+  font-size: 45px;
+}
+
+.slide .body > *
+{
+  margin-bottom: 40px;
+}
+
+.slide h1,
+.slide h2
+{
+  font-family: 'Museo Sans Rounded', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: normal;
+  color: #057;
+  font-size: 60px;
+}
+
+.slide pre
+{
+  font-size: 40px;
+  font-family: 'ubuntu mono';
+  margin: 40px;
+  line-height: 50px;
+  background: white;
+  padding: 20px;
+}
+
+.slide pre.shell
+{
+  background: black;
+  color: lime;
+}
+
+.slide pre.type-error
+{
+  background: none;
+  color: #f40;
+}
+
+.slide pre.big
+{
+  font-size: 150%;
+  line-height: 70px;
+}
+
+.slide pre.type-error b
+{
+  color: #d04;
+}
+
+.slide p
+{
+  color: #000;
+  margin: 40px 0;
+}
+
+.slide a
+{
+  color: #046;
+  text-decoration: none;
+}
+
+.slide ul,
+.slide ol
+{
+  margin-left: 60px;
+}
+
+.slide li
+{
+  margin: 20px 0;
+}
+
+.slide code
+{
+  font-family: 'ubuntu mono';
+  background: white;
+  padding: 5px;
+  font-size: 110%;
+  color: rgb(199, 0, 143)
+}
+
+.slide.titlepage h1
+{
+  margin: 40px 0;
+}
+
+.slide h1.sans-header
+{
+  font-family: 'Museo Sans Rounded', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  color: #046;
+}
+
+.slide .whisper
+{
+  color: #688;
+  margin: 40px 0;
+  font-size: 80%;
+}
+
+.slide.reason h1 { font-size: 500%; }
+.slide.reason h2 { font-size: 250%; }
+

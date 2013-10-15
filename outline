@@ -1,0 +1,293 @@
+Erik:
+1) Primitives: Lists, Strings, GHCi.
+2) Types, some Classes.
+
+Sebas:
+3) Functions, more types, polymorphism.
+4) ADTs, Maybe, Either.
+
+Erik:
+5) IO.
+6) Functors, Monads, more Classes.
+
+Sebas:
+7) Modules, Import, etc.
+8) Infrastructure.
+
+===============================================================================
+
+
+            FUNCTIONS
+----------------------------------------
+
+> let upper a = a >= 'A' && a <= 'Z'
+
+Application
+
+> upper 'a'
+False
+> upper 'A'
+True
+> :t upper
+upper :: Char -> Bool
+
+> :{
+| let upper :: Char -> Bool
+|     upper 'a' = True
+| :}
+
+            CURRYING
+----------------------------------------
+
+> let both a b = upper a && upper b
+> :t both
+both :: Char -> Char -> Bool
+> both 'a' 'X'
+False
+> :t both 'a'
+both 'a' :: Char -> Bool
+> (both 'X') 'Y'
+True
+
+            INPUT TUPLES
+----------------------------------------
+
+> let both (a, b) = upper a && upper b
+
+> :t both
+both :: (Char, Char) -> Bool
+
+
+            LAMBDA EXPRESSIONS
+----------------------------------------
+
+> let both = \a b -> upper a && upper b
+
+            FUNCTIONS ARE VALUES
+----------------------------------------
+
+> :t [\a b -> a && b, \a b -> a || b]
+... :: [Bool -> Bool -> Bool]
+
+> :t [(&&), (||)]
+... :: [Bool -> Bool -> Bool]
+
+            OPERATOR SECTIONS
+----------------------------------------
+
+> True && False
+False
+> (&&) True False
+False
+> :t (&&)
+(&&) :: Bool -> Bool -> Bool
+
+> (True &&) False
+False
+> :t (True &&)
+(True &&) :: Bool -> Bool
+
+> (&&) False) True
+False
+> :t (&& False)
+(&& False) :: Bool -> Bool
+
+
+            POLYMORPHISM
+----------------------------------------
+
+> let swap t = (snd t, fst t)
+> swap (1, 2)
+(2,1)
+> :t swap
+swap :: (a, b) -> (b, a)
+
+> :t fst
+fst :: (a, b) -> a
+> :t snd
+snd :: (a, b) -> b
+
+> let withNeg a = (a, not a)
+> :t withNeg
+withNeg :: Bool -> (Bool, Bool)
+> withNeg True
+(True,False)
+
+
+            PATTERN MATCHING
+----------------------------------------
+
+> let swap (f, s) = (s, f)
+> :t swap
+swap :: (a, b) -> (b, a)
+
+
+            HIGHER ORDER FUNCTIONS
+----------------------------------------
+
+Functions that ohter take functions as arguments.
+
+> let thrice f x = f (f (f x))
+> thrice (*2) 4
+32
+
+> :t thrice
+thrice :: (t -> t) -> t -> t
+
+
+            BASE FUNCTIONS
+----------------------------------------
+
+> :t id
+id :: a -> a
+> id 1
+1
+
+> :t const
+const :: a -> b -> a
+> const 'a' 'b'
+'a'
+
+> :t flip
+flip :: (a -> b -> c) -> b -> a -> c
+> flip (-) 10 5
+-5
+
+> :t (.)
+(.) :: (b -> c) -> (a -> b) -> a -> c
+
+===============================================================================
+
+            DATA TYPES
+----------------------------------------
+
+> :{
+| data Person = Person String Int
+|   deriving (Eq, Show)
+| :}
+
+> Person "Sebas" 30
+Person "Sebas" 30
+
+> :t Person
+Person :: String -> Int -> Person
+
+            RECORD TYPES
+----------------------------------------
+
+> :{
+| data Person = Person
+|   { name :: String
+|   , age  :: Int
+|   } deriving (Eq, Show)
+| :}
+
+> :t name
+name :: Person -> String
+
+> :t age
+age :: Person -> Int
+
+
+            TYPE VARIABLES
+----------------------------------------
+
+> data Pair a = MkPair a a
+
+> :t MkPair
+MkPair :: a -> a -> Pair a
+
+> let total (MkPair a b) = a + b
+> total (MkPair 15 10)
+25
+
+            SUM TYPES
+----------------------------------------
+
+> data Maybe a = Nothing | Just a
+
+> :t Just
+Just :: a -> Maybe a
+> :t Nothing
+Nothing :: Maybe a
+
+> :t Just "hello"
+Just "hello" :: Maybe String
+
+
+            RECURSIVE TYPES
+----------------------------------------
+
+> data List a = Nil | Cons a (List a)
+
+> let hey = Cons 'h' (Cons 'e' (Cons 'y' Nil))
+
+> :t hey
+hey :: List Char
+
+?exercise
+
+toList :: List a -> [a]
+toList l =
+ case l of
+  Nil       -> []
+  Cons x xs -> x : toList xs
+
+head :: List a -> Maybe a
+head l =
+ case l of
+  Nil      -> Nothing
+  Cons x _ -> Just x
+
+?exercise
+
+last :: List a -> Maybe a
+last l =
+ case l of
+  Nil        -> Nothing
+  Cons x Nil -> Just x
+  Cons _ xs  -> last xs
+
+
+            LIST FUNCTIONS
+----------------------------------------
+
+> :t map
+map :: (a -> b) -> [a] -> [b]
+
+> :t filter
+filter :: (a -> Bool) -> [a] -> [a]
+
+> let we = [Person "S" 30, Person "E" 32]
+> sum (map age we)
+62
+
+> sum :: Num a => [a] -> a
+
+===============================================================================
+
+
+            PATTERN MATCHING ON LISTS
+----------------------------------------
+
+> let rev3 [a, b, c] = [c, b, a]
+> rev3 "hey"
+"yeh"
+> rev3 "hey!"
+"*** Exception: <interactive>:32:5-30: Non-exhaustive patterns in function rev3
+
+> :{
+| let reverse xs =
+|       case xs of
+|         []     -> []
+|         (x:xs) -> reverse xs ++ [x]
+| :}
+> reverse "hello"
+"elloh"
+
+> :{
+| let reverse :: [a] -> [a]
+|     reverse []     = []
+|     reverse (x:xs) = reverse xs ++ [x]
+| :}
+

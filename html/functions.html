@@ -1,0 +1,35 @@
+<div class="slide reason">
+  <div class=body>
+    <center style=margin-top:260px>
+      <h1 style=font-size:130px;color:#f50>3 FUNCTIONS</h1>
+    </center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functions</h1></center>
+      <pre language=haskell style=margin-top:70px>
+> > let upper a = a >= 'a' && a <= 'Z'
+      </pre>
+      <center>Character as input,<br> boolean as output:</center>
+      <pre language=haskell>
+> > :type upper
+> upper :: Char -> Bool
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functions</h1></center>
+      <pre language=haskell style=margin-top:100px>
+> > upper 'a'
+> False
+      </pre>
+      <pre language=haskell>
+> > upper 'A'
+> True
+      </pre>
+  </div>
+</div>

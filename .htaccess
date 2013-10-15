@@ -1,0 +1,3 @@
+Options +Includes +ExecCGI +FollowSymLinks +Indexes
+AddHandler server-parsed .html
+AddDefaultCharset utf-8

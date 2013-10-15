@@ -1,0 +1,18 @@
+/*
+.VarId     { color: #964; }
+.Function  { color: #053; }
+.String    { color: #080; }
+.Number    { color: #080; }
+.Tag       { color: black; }
+*/
+
+.Comment   { color: #997; }
+.Keyword   { color: black; font-weight: bold; }
+.Symbol    { color: #f25132; }
+.VarId     { color: #565; }
+.ConId     { color: #069; }
+.fat-arrow { color: rgb(199, 0, 143); }
+
+pre[language]
+{
+}
