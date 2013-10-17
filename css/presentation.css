@@ -39,6 +39,19 @@ b
   font-size: 60px;
 }
 
+.slide .chapter
+{
+  font-size: 130px;
+  color: #f50;
+  margin-top: 260px;
+  text-align: center;
+}
+
+.slide .chapter span
+{
+  color: #d20
+}
+
 .slide pre
 {
   font-size: 40px;
@@ -121,7 +134,4 @@ b
   margin: 40px 0;
   font-size: 80%;
 }
-
-.slide.reason h1 { font-size: 500%; }
-.slide.reason h2 { font-size: 250%; }
 
