@@ -1,0 +1,3 @@
+[submodule "lhs2html5"]
+	path = lhs2html5
+	url = git@github.com:sebastiaanvisser/lhs2html5.git
