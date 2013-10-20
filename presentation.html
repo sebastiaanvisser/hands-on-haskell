@@ -14,9 +14,11 @@
 
 <script src=lhs2html5/3rd/jquery-1.4.2.js></script>
 <script src=lhs2html5/3rd/jquery.touchwipe.min.js.txt></script>
+<script src=lhs2html5/js/multislide.js></script>
 <script src=lhs2html5/js/navigation.js></script>
 <script src=lhs2html5/js/zoom.js></script>
 <script src=lhs2html5/js/highlight.js></script>
+<script src=lhs2html5/js/geometry.js></script>
 <script src=lhs2html5/js/bindings.js></script>
 <script src=lhs2html5/js/symbols.js></script>
 <script src=lhs2html5/js/utils.js></script>
@@ -45,6 +47,7 @@
 <script>
 // var resolution = [1100,806] // Printable to US-letter in Safari.
 var resolution = [1024,768] // Appropriate for most beamers.
+setupMultislide()
 setupNavigation()
 setupResizing()
 setupHighlighting("lhs2html5/highlight/highlight.cgi")
@@ -52,6 +55,7 @@ setupSymbolHighlighting()
 // setupSymbolReplacement()
 // setupKeywordReplacement()
 // setupIdentifierReplacement()
+setupGeometry()
 setupKeyBindings()
 setupMouseBindings()
 setupSlideNumbering()
