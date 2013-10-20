@@ -135,3 +135,7 @@ b
   font-size: 80%;
 }
 
+.slide td
+{
+  padding: 20px;
+}
