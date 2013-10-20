@@ -47,6 +47,34 @@ Prelude>
 
 <div class=slide>
   <div class=body>
+    <center><h1>Bindings</h1></center>
+    <pre language=haskell>
+> > let x = 1
+> > x + x
+> 2
+    </pre>
+    <hr>
+    <center>GHCi only; In a file, just use <code>x = 1</code>.</center>
+    <hr>
+    <center>Non-mutable; Re-binding shadows.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Files</h1></center>
+    <pre language=haskell>
+> x = 1
+> y = x + 2
+    </pre>
+    <center>Save this with extension <code>.hs</code>.</center><br>
+    <center>Load in GHCi with <code>ghci &lt;filename&gt;</code></center><br>
+    <center>Reload with <code>:r</code></center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
     <center><h1>Booleans</h1></center>
     <pre language=haskell>
 > > True
