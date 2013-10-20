@@ -217,6 +217,8 @@ Prelude>
 > [True, True, False] :: [Bool]
 > > :t []
 > [] :: [a]
+> > 1 : [2,3]
+> [1,2,3]
 > > [1,2,3] ++ [4,5,6]
 > [1,2,3,4,5,6]
     </pre>
@@ -261,6 +263,26 @@ Prelude>
     <pre language=haskell>
 > > elem 3 [1,2,4]
 > False
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Infinite lists</h1></center>
+    <pre language=haskell>
+> > head [1..]
+> 1
+    </pre>
+    <hr>
+    <pre language=haskell>
+> > take 10 (cycle [1,2,3])
+> [1,2,3,1,2,3,1,2,3,1]
+    </pre>
+    <hr>
+    <pre language=haskell>
+> > head (tail (repeat 2))
+> 2
     </pre>
   </div>
 </div>
