@@ -4,30 +4,356 @@
   </div>
 </div>
 
+<!-- ======================================================================= -->
+
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell style=margin-top:70px>
-> > let upper a = a >= 'a' && a <= 'Z'
+      <pre language=haskell data-geom=70,840>
+> > let upper c = (c >= 'A') && (c <= 'Z')
       </pre>
-      <center>Character as input,<br> boolean as output:</center>
-      <pre language=haskell>
-> > :type upper
+      <hr>
+      <pre language=haskell data-geom=,500>
+> > :t upper
 > upper :: Char -> Bool
       </pre>
+      <center>Character as input,<br> boolean as output.</center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell style=margin-top:100px>
+      <pre language=haskell data-geom=100,720>
+> upper :: Char -> Bool
+> upper c = (c >= 'A') && (c <= 'Z')
+      </pre>
+      <hr>
+      <center data-geom=80>Type signature is optional,<br>but recommended.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Function Application</h1></center>
+      <pre language=haskell data-geom=100,300>
 > > upper 'a'
 > False
       </pre>
-      <pre language=haskell>
-> > upper 'A'
-> True
+      <center>Just use a space!</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Application Precedence</h1></center>
+    <center data-geom=160>Function application binds stronger<br>than operators.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Application Precedence</h1></center>
+    <center data-geom=100>so:</center>
+    <pre language=haskell data-geom=,260>> print (1 + 2)</pre>
+    <center>and not:</center>
+    <pre language=haskell style=text-decoration:line-through data-geom=,230>> print 1 + 2</pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Multiple Arguments</h1></center>
+      <pre language=haskell data-geom=100,760>
+> > let both a b = upper a && upper b
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,600>
+> > :t both
+> both :: Char -> Char -> Bool
+      </pre>
+      <center>Multiple arguments,<br> multiple arrows in type.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Currying</h1></center>
+      <pre language=haskell data-geom=,340>
+> > both 'a' 'X'
+> False
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,340>
+> > (both 'a') 'X'
+> False
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,500>
+> > :t both 'a'
+> both 'a' :: Char -> Bool
       </pre>
   </div>
 </div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Input tuples</h1></center>
+      <pre language=haskell data-geom=120,780>
+> > let both (a, b) = upper a && upper b
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=80,600>
+> > :t both
+> both :: (Char, Char) -> Bool
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Lambda expressions</h1></center>
+      <pre language=haskell data-geom=220,530>
+> \a b -> upper a && upper b
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Operators are functions</h1></center>
+      <pre language=haskell data-geom=60,380>
+> > True && False
+> False
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,380>
+> > (&&) True False
+> False
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,580>
+> > :t (&&)
+> (&&) :: Bool -> Bool -> Bool
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Operator sections</h1></center>
+      <pre language=haskell data-geom=140,400>
+> > (True &&) False
+> False
+      </pre>
+      <pre language=haskell data-geom=,540>
+> > :t (True &&)
+> (True &&) :: Bool -> Bool
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Operator sections</h1></center>
+      <pre language=haskell data-geom=140,400>
+> > (&& False) True
+> False
+      </pre>
+      <pre language=haskell data-geom=,540>
+> > :t (&& False)
+> (&& False) :: Bool -> Bool
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functions are values</h1></center>
+      <pre language=haskell data-geom=100,510>
+> > funs = [ upper
+>          , (== 'a')
+>          , elem "xyz"
+>          ]
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,510>
+> > :t funs
+> funs :: [Char -> Bool]
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Polymorphism</h1></center>
+      <pre language=haskell data-geom=100,600>
+> > let swap t = (snd t, fst t)
+> > swap (1, 2)
+> (2,1)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,490>
+> > :t swap
+> swap :: (a, b) -> (b, a)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Polymorphism</h1></center>
+      <pre language=haskell data-geom=100,380>
+> > :t fst
+> fst :: (a, b) -> a
+      </pre>
+      <pre language=haskell data-geom=,380>
+> > :t snd
+> snd :: (a, b) -> b
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Polymorphism</h1></center>
+      <pre language=haskell data-geom=100,540>
+> > let fn t = ('a', snd t)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,540>
+> > :t fn
+> fn :: (a, b) -> (Char, b)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Pattern matching</h1></center>
+      <pre language=haskell data-geom=100,540>
+> > let swap (f, s) = (s, f)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,540>
+> > :t swap
+> swap :: (a, b) -> (b, a)
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center>
+      <h1>Higher order functions</h1>
+      <p data-geom=160>Functions that take <br>ohter functions as arguments.</p>
+    </center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Higher order functions</h1></center>
+      <pre language=haskell data-geom=80,680>
+> > let twice f (a, b) = (f a, f b)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,400>
+> > twice (*2) (2, 3)
+> (4, 6)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,760>
+> > :t twice
+> twice :: (a -> b) -> (a, a) -> (b, b)
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Identity</h1></center>
+      <pre language=haskell data-geom=120,260>
+> id :: a -> a
+      </pre>
+      <pre language=haskell data-geom=,140>
+> > id 1
+> 1
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Constant</h1></center>
+      <pre language=haskell data-geom=120,420>
+> const :: a -> b -> a
+      </pre>
+      <pre language=haskell data-geom=,320>
+> > const 'a' 'b'
+> 'a'
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Flipping Arguments</h1></center>
+      <pre language=haskell data-geom=120,750>
+> flip :: (a -> b -> c) -> b -> a -> c
+      </pre>
+      <pre language=haskell data-geom=,340>
+> > flip (-) 10 5
+> -5
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Application</h1></center>
+      <pre language=haskell data-geom=120,520>
+> ($) :: (a -> b) -> a -> b
+      </pre>
+      <pre language=haskell data-geom=,680>
+> > print $ id $ const 2 $ (*3) $ 4
+> 2
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Composition</h1></center>
+      <pre language=haskell data-geom=120,760>
+> (.) :: (b -> c) -> (a -> b) -> a -> c
+      </pre>
+      <pre language=haskell data-geom=,510>
+> > (fst . snd) (1, (2, 3))
+> 2
+      </pre>
+  </div>
+</div>
+
+
+
+
+
+
+
