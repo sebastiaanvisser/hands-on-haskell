@@ -247,3 +247,36 @@ Prelude>
     </pre>
   </div>
 </div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality</h1></center>
+    <pre language=haskell>
+> > 1 == 1
+> True
+> > [1,2,3] /= [1,2,4]
+> True
+    </pre>
+    <hr>
+    <center>Works on most types.</center>
+    <center>Q: what is the type of (==)?</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Comparison</h1></center>
+    <pre language=haskell>
+> > 1 > 2
+> False
+> > [1,2,3] < [1,2,4]
+> True
+    </pre>
+    <center>Also <code>(&lt;=), (&gt;=)</code>.</center>
+    <hr>
+    <pre language=haskell>
+> > :t (<)
+> (<) :: Ord a => a -> a -> Bool
+    </pre>
+  </div>
+</div>
