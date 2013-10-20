@@ -4,4 +4,219 @@
   </div>
 </div>
 
+<div class=slide>
+  <div class=body>
+    <center><h1>Preliminaties</h1></center>
+    <center>Haskell platform:<br>compiler (GHC) and libraries.</center>
+    <br>
+    <center>GHCi: interactive environment (REPL).</center>
+  </div>
+</div>
 
+<div class=slide>
+  <div class=body>
+    <center><h1>Preliminaties</h1></center>
+    <center>Start GHCi:</center>
+    <pre style="font-size: 26px; line-height: 42px">
+> ghci
+GHCi, version 7.6.1: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Prelude>
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Numbers</h1></center>
+    <pre language=haskell>
+> > 1
+> 1
+> > 1 + 1
+> 2
+> > 2 * (3.1 - 1)
+> 4.2
+
+    </pre>
+      <center>Also: <code>(-), div, mod, (/)</code>, &hellip;</center>
+      <center>Q: what is 56088 divided by 456?</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Booleans</h1></center>
+    <pre language=haskell>
+> > True
+> True
+> > not True
+> False
+> > True && (False || True)
+> True
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>If-then-else</h1></center>
+    <pre language=haskell>
+> > if True then 1 else 2
+> 1
+    </pre>
+      <center>This is an <emph>expression</emph>: you cannot leave out a branch.</center>
+      <center>C.f. ternary operator.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Types</h1></center>
+    <pre language=haskell>
+> > :t True
+> True :: Bool
+> > :t not
+> not :: Bool -> Bool
+    </pre>
+      <center>Q: What is the type of (&&)?<center><br>
+      <center>Bonus: Look at the type of (+).</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Type errors</h1></center>
+    <pre language=haskell>
+> > if not then True else False
+>
+> &lt;interactive&gt;:1:4:
+>     Couldn't match expected type `Bool'
+>       with actual type `Bool -> Bool'
+>     In the expression: not
+>     In the expression:
+>       if not then True else False
+</pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Type classes</h1></center>
+    <pre language=haskell>
+> > :t 1
+> 1 :: Num a => a
+    </pre>
+    <center><code>Num</code> is a <emph>type class</emph>.</center><br>
+    <center>Says: <code>1</code> can be any type that is numeric.</center><br>
+    <center>Q: Explain the type of (+).</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Type class errors</h1></center>
+    <pre language=haskell>
+> > 1 + True
+>
+> &lt;interactive&gt;:25:3:
+>     No instance for (Num Bool) arising from
+>       a use of `+'
+>     Possible fix: add an instance declaration
+>       for (Num Bool)
+>     In the expression: 1 + True
+>     In an equation for `it': it =
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Number types</h1></center>
+    <table>
+    <tr><td>Integral:</td> <td><code>Integer, Int</code></td></tr>
+    <tr><td>Floating:</td> <td><code>Double, Float</code></td></tr>
+    <tr><td>Fractional:</td> <td><code>Rational</code></td></tr>
+    <tr><td>Fixed size:</td> <td><code style="font-size: 80%">Int8 ... Int64, Word8 ... Word64</code></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Number types</h1></center>
+    <table>
+    <tr><td>Integral:</td> <td><code>Integer, Int</code></td></tr>
+    <tr><td>Floating:</td> <td><code>Double, Float</code></td></tr>
+    <tr><td>Fractional:</td> <td><code>Rational</code></td></tr>
+    <tr><td>Fixed size:</td> <td><code style="font-size: 80%">Int8 ... Int64, Word8 ... Word64</code></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Characters and strings</h1></center>
+    <pre language=haskell>
+> > :t 'c'
+> 'c' :: Char
+> > :t "Hello world"
+> "Hello World" :: String
+> > "FP" ++ "days"
+> "FPdays"
+    </pre>
+    <center>Q: What is the type of "Hello World" really?</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Lists</h1></center>
+    <pre language=haskell>
+> > :t [True, True, False]
+> [True, True, False] :: [Bool]
+> > :t []
+> [] :: [a]
+> > [1,2,3] ++ [4,5,6]
+> [1,2,3,4,5,6]
+      </pre>
+      <center>Q: Try to make a list containing one, two and false.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>List functions</h1></center>
+    <pre language=haskell>
+> > length [1,4,7]
+> 3
+    </pre>
+    <pre language=haskell>
+> > take 3 [1..10]
+> [1,2,3]
+    </pre>
+    <pre language=haskell>
+> > drop 3 [10,9..1]
+> [7,6,5,4,3,2,1]
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>List functions - 2</h1></center>
+    </pre>
+    <pre language=haskell>
+> > head [4,5,6]
+> 4
+    </pre>
+    <pre language=haskell>
+> > tail [4,5,6]
+> [5,6]
+    </pre>
+    <pre language=haskell>
+> > elem 3 [1,2,4]
+> False
+    </pre>
+  </div>
+</div
