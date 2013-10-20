@@ -38,9 +38,9 @@ Prelude>
 > 2
 > > 2 * (3.1 - 1)
 > 4.2
-
     </pre>
       <center>Also: <code>(-), div, mod, (/)</code>, &hellip;</center>
+      <hr>
       <center>Q: what is 56088 divided by 456?</center>
   </div>
 </div>
@@ -80,6 +80,7 @@ Prelude>
 > > :t not
 > not :: Bool -> Bool
     </pre>
+      <hr>
       <center>Q: What is the type of (&&)?<center><br>
       <center>Bonus: Look at the type of (+).</center>
   </div>
@@ -108,8 +109,10 @@ Prelude>
 > > :t 1
 > 1 :: Num a => a
     </pre>
+    <hr>
     <center><code>Num</code> is a <emph>type class</emph>.</center><br>
     <center>Says: <code>1</code> can be any type that is numeric.</center><br>
+    <hr>
     <center>Q: Explain the type of (+).</center>
   </div>
 </div>
@@ -166,6 +169,7 @@ Prelude>
 > > "FP" ++ "days"
 > "FPdays"
     </pre>
+    <hr>
     <center>Q: What is the type of "Hello World" really?</center>
   </div>
 </div>
@@ -180,8 +184,9 @@ Prelude>
 > [] :: [a]
 > > [1,2,3] ++ [4,5,6]
 > [1,2,3,4,5,6]
-      </pre>
-      <center>Q: Try to make a list containing one, two and false.</center>
+    </pre>
+    <hr>
+    <center>Q: Try to make a list containing one, two and false.</center>
   </div>
 </div>
 
@@ -192,10 +197,12 @@ Prelude>
 > > length [1,4,7]
 > 3
     </pre>
+    <hr>
     <pre language=haskell>
 > > take 3 [1..10]
 > [1,2,3]
     </pre>
+    <hr>
     <pre language=haskell>
 > > drop 3 [10,9..1]
 > [7,6,5,4,3,2,1]
@@ -210,10 +217,12 @@ Prelude>
 > > head [4,5,6]
 > 4
     </pre>
+    <hr>
     <pre language=haskell>
 > > tail [4,5,6]
 > [5,6]
     </pre>
+    <hr>
     <pre language=haskell>
 > > elem 3 [1,2,4]
 > False
