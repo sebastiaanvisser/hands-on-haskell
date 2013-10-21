@@ -4,3 +4,79 @@
   </div>
 </div>
 
+<!-- ====================================================================== -->
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Importing modules</h1></center>
+    <pre language=haskell data-geom=150,330>
+> import Data.List
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Explicit imports</h1></center>
+    <pre language=haskell data-geom=150,600>
+> import Data.List (sort, group)
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Hiding Imports</h1></center>
+    <pre language=haskell data-geom=150,740>
+> import Data.List hiding (intercalate)
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Qualified Imports</h1></center>
+    <pre language=haskell data-geom=150,660>
+> import qualified Data.List as Ls
+    </pre>
+    <pre language=haskell data-geom=100,560>
+> lines :: [String] -> String
+> lines = Ls.intercalate "\n"
+    </pre>
+  </div>
+</div>
+
+
+<div class=slide>
+  <div class=body>
+    <center>
+      <h1>Good Practice</h1>
+      <p data-geom=120>Use explicit imports<br>and qualified imports<br> where possible.</p>
+    </center>
+  </div>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Creating a Module</h1></center>
+    <pre language=haskell data-geom=140,700>
+> module MyApp.MyModule
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+  <center><h1>Explicit Exports</h1></center>
+    <pre language=haskell data-geom=140,700>
+> module MyApp.MyModule (f, g) where
+> 
+> f = ...
+> g = ...
+    </pre>
+  </div>
+</div>
+
+
