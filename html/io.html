@@ -1,0 +1,128 @@
+<div class=slide>
+  <div class=body>
+    <center><h1>IO?</h1></center>
+    <center data-geom=160>Haskell function are <em>pure</em> and <em>lazy</em>.</center><br>
+    <center>Not ideal for IO: needs side effects and sequencing.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Do-notation</h1></center>
+    <pre language=haskell>
+> main = do
+>   putStrLn "What is your name?"
+>   name <- getLine
+>   putStrLn ("Hello " ++ name ++ "!")
+    </pre>
+    <hr>
+    <center>Perform statements one after another.</center><br>
+    <center>Use <code>&lt;-</code> to bind results.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>IO type</h1></center>
+    <pre language=haskell>
+> putStrLn :: String -> IO ()
+    </pre>
+    <ul>
+      <li>Takes a <code>String</code>.</li>
+      <li>Performs IO.</li>
+      <li>Doesn't return result.</li>
+    </ul>
+    <hr>
+    <pre class=whisper language=haskell>
+> () :: ()
+    </pre>
+    <center class=whisper>The unit type with only one value.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>IO operations</h1></center>
+    <pre language=haskell>
+> print :: Show a => a -> IO ()
+    </pre>
+    <hr>
+    <pre language=haskell>
+> getLine :: IO String
+    </pre>
+    <hr>
+    <pre language=haskell>
+> readFile :: FilePath -> IO String
+    </pre>
+    <hr>
+    <pre language=haskell>
+> writeFile :: FilePath -> String -> IO ()
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Control structures</h1></center>
+    <center>IO actions are first class.</center>
+    <pre language=haskell>
+> > when (even 2) (putStrLn "Two is even.")
+> Two is even.
+    </pre>
+    <hr>
+    <pre language=haskell>
+> when :: Bool -> IO () -> IO ()
+> when cond act =
+>   if cond
+>   then act
+>   else return ()
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Return</h1></center>
+    <center>Return isn't what you're used to.</center>
+    <pre language=haskell>
+> return :: a -> IO a
+    </pre>
+    <center>Lifts a pure value into IO.</center><br>
+    <center><em>Doesn't</em> jump out of the function.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Control structures - 2</h1></center>
+    <center data-geom=100>Define a function that takes a list of IO actions, and performs all of them.</center>
+    <hr>
+    <pre language=haskell>
+> mySequence :: [IO ()] -> IO ()
+> mySequence [] = return ()
+> mySequence (act:acts) = do
+>   act
+>   mySequence acts
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Other control functions</h1></center>
+    <pre language=haskell>
+> mapM :: (a -> IO b) -> [a] -> IO [b]
+    </pre>
+    <pre language=haskell>
+> forM :: [a] -> (a -> IO b) -> IO [b]
+    </pre>
+    <hr>
+    <pre language=haskell>
+> forever :: IO a -> IO b
+    </pre>
+    <hr>
+    <pre language=haskell>
+> (>>=) :: IO a -> (a -> IO b) -> IO b
+    </pre>
+  </div>
+</div>
