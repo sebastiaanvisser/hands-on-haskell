@@ -4,3 +4,262 @@
   </div>
 </div>
 
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Data types</h1></center>
+      <pre language=haskell data-geom=80,680>
+> data Person = Person String Int
+>   deriving (Eq, Show)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,400>
+> > Person "Alice" 25
+> Person "Alice" 25
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,670>
+> > :t Person
+> Person :: String -> Int -> Person
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Record Types</h1></center>
+      <pre language=haskell data-geom=80,680>
+> data Person = Person
+>   { name :: String
+>   , age  :: Int
+>   } deriving (Eq, Show)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,500>
+> > :t name
+> name :: Person -> String
+> > :t age
+> age :: Person -> Int
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Type Variables</h1></center>
+      <pre language=haskell data-geom=80,500>
+> data Pair a = MkPair a a
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,520>
+> > :t MkPair
+> MkPair :: a -> a -> Pair a
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,640>
+> > let total (MkPair a b) = a + b
+> > total (MkPair 15 10)
+> 25
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Enumerations</h1></center>
+      <pre language=haskell data-geom=80,320>
+> data Direction
+>   = North
+>   | East
+>   | South
+>   | West
+      </pre>
+      <pre language=haskell data-geom=,380>
+> > :t North
+> North :: Direction
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Sum Types</h1></center>
+      <pre language=haskell data-geom=80,680>
+> data Maybe a = Nothing | Just a
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,420>
+> > :t Just
+> Just :: a -> Maybe a
+      </pre>
+      <pre language=haskell data-geom=,420>
+> > :t Nothing
+> Nothing :: Maybe a
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Recursive Types</h1></center>
+      <pre language=haskell data-geom=100,700>
+> data List a = Nil
+>             | Cons a (List a)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=100,860>
+> let hi = Cons 'h' (Cons 'i' (Cons '!' Nil))
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Pattern Matching</h1></center>
+      <pre language=haskell data-geom=140,540>
+> myHead :: List a -> Maybe a
+> myHead l =
+>   case l of
+>    Nil      -> Nothing
+>    Cons x _ -> Just x
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Implementing <code>last</code></h1></center>
+      <pre language=haskell data-geom=140,540>
+> myLast :: List a -> Maybe a
+      </pre>
+      <pre language=haskell data-geom=40,70>
+> ???
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Implementing <code>last</code></h1></center>
+      <pre language=haskell data-geom=140,540>
+> myLast :: List a -> Maybe a
+> myLast l =
+>   case l of
+>     Nil        -> ...
+>     Cons x Nil -> ...
+>     Cons _ xs  -> ...
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Implementing <code>last</code></h1></center>
+      <pre language=haskell data-geom=140,540>
+> myLast :: List a -> Maybe a
+> myLast l =
+>   case l of
+>     Nil        -> Nothing
+>     Cons x Nil -> Just x
+>     Cons _ xs  -> myLast xs
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Built-in Lists</h1></center>
+      <pre language=haskell data-geom=100,700>
+> data List a = Nil | Cons a (List a)
+      </pre>
+      <pre language=haskell data-geom=,700>
+> data [a]    = []  | a : [a]
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Pattern Matching on lists</h1></center>
+      <pre language=haskell data-geom=100,540>
+> and :: [Bool] -> Bool
+> and []     = True
+> and (x:xs) = x && and xs
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,540>
+> or :: [Bool] -> Bool
+> or []     = False
+> or (x:xs) = x || and xs
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Generalizing list functions</h1></center>
+      <pre language=haskell data-geom=60,540>
+> and []     = True
+> or  []     = False
+      </pre>
+      <pre language=haskell data-geom=-45,540>
+> and (x:xs) = x && and xs
+> or  (x:xs) = x || or  xs
+      </pre>
+      <hr>
+      <center>Combine function <code>f</code> + default case <code>d</code>:</center>
+      <pre language=haskell data-geom=,660>
+> gen _ d []     = d
+> gen f d (x:xs) = f x (gen f d xs)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Generalizing list functions</h1></center>
+      <pre language=haskell data-geom=80,790>
+> foldr :: (a -> b -> b) -> b -> [a] -> b
+> foldr _ d []     = d
+> foldr f d (x:xs) = f x (foldr f d xs)
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=80,540>
+> and, or :: [Bool] -> Bool
+> and = foldr (&&) True
+> or  = foldr (||) False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>List Functions</h1></center>
+      <pre language=haskell data-geom=80,580>
+> map :: (a -> b) -> [a] -> [b]
+      </pre>
+      <pre language=haskell data-geom=40,70>
+> ???
+      </pre>
+      <pre language=haskell data-geom=,700>
+> filter :: (a -> Bool) -> [a] -> [a]
+      </pre>
+      <pre language=haskell data-geom=40,70>
+> ???
+      </pre>
+  </div>
+</div>
+
