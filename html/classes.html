@@ -1,0 +1,213 @@
+<div class=slide>
+  <div class=body>
+    <center><h1>Classes</h1></center>
+    <center>Classes allow <em>ad-hoc</em> overloading of functions.</center>
+    <pre language=haskell>
+> (==) :: Eq a => a -> a -> Bool
+    </pre>
+    <center data-geom=100>Compare with (parametrically) polymorphic functions.</center>
+    <pre language=haskell>
+> length :: [a] -> Bool
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Defining classes</h1></center>
+    <pre language=haskell>
+> class Equal a where
+>   equal :: a -> a -> Bool
+    </pre>
+    <center>Defines an interface, no implementation yet.</center>
+    <hr>
+    <pre language=haskell>
+> instance Equal () where
+>   equal () () = True
+    </pre>
+    <hr>
+    <center>Q: Give instances for <code>Bool</code> and <code>Maybe a</code>.
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Common type classes</h1></center>
+    <pre language=haskell>
+> class Eq a where
+>   (==) :: a -> a -> Bool
+    </pre>
+    <pre language=haskell>
+> class Ord a where
+>   (<=) :: a -> a -> Bool
+    </pre>
+    <hr>
+    <pre language=haskell>
+> class Show a where
+>   show :: a -> String
+> class Read a where
+>   read :: String -> a
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
+    <pre language=haskell>
+> class Functor f where
+>   fmap :: (a -> b) -> f a -> f b
+    </pre>
+    <hr>
+    <center>Generalizes list's <code>map</code>.</center><br>
+    <center>Instances for <code>Maybe, [], IO</code>, &hellip;</center><br>
+    <hr>
+    <center>Q: Write an instance for your <code>Tree</code> type.</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Nested Maybes</h1></center>
+    <center data-geom=160>Imagine web application where users can have accounts and sites.</center>
+    <pre language=haskell>
+> parseSessionId :: String -> Maybe SessionId
+> lookupUser :: SessionId -> Maybe User
+> getUserSite :: User -> Maybe Site
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Nested Maybes</h1></center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str = &hellip;
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Nested Maybes</h1></center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str =
+>   case parseSessionId str of
+>     Nothing  -> Nothing
+>     Just sid -> &hellip;
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Nested Maybes</h1></center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str =
+>   case parseSessionId str of
+>     Nothing  -> Nothing
+>     Just sid ->
+>       case lookupUser sid of
+>         Nothing  -> Nothing
+>         Just usr -> &hellip;
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Nested Maybes</h1></center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str =
+>   case parseSessionId str of
+>     Nothing  -> Nothing
+>     Just sid ->
+>       case lookupUser sid of
+>         Nothing  -> Nothing
+>         Just usr ->
+>           case getUserSite of
+>             Nothing   -> Nothing
+>             Just site -> show site
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Sequencing Maybes</h1></center>
+    <center>Let's abstract the pattern:</center>
+    <pre language=haskell>
+> (>>?) :: Maybe a -> (a -> Maybe b) -> Maybe b
+> Nothing  >>? _ = Nothing
+> (Just x) >>? f = f x
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Sequencing Maybes</h1></center>
+    <center>Now our example becomes:</center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str =
+>   parseSessionId str >>? \sid  ->
+>   lookupUser sid     >>? \usr  ->
+>   getUserSite usr    >>? \site ->
+>   Just (show site)
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Monad</h1></center>
+    <center>This pattern occurs more often, and is captured in a class:</center>
+    <pre language=haskell>
+> class Monad m where
+>   (>>=)  :: m a -> (a -> m b) -> m b
+>   return :: a -> m a
+    </pre>
+    <hr>
+    <pre language=haskell>
+> instance Monad Maybe where
+>   (>>=)  = (>>?)
+>   return = Just
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Do notation revisited</h1></center>
+    <center>Do notation isn't just for IO. It works for all monads.</center>
+    <pre language=haskell>
+> showSessionSite :: String -> Maybe String
+> showSessionSite str = do
+>   sid  <- parseSessionId str
+>   usr  <- lookupUser sid
+>   site <- getUserSite usr
+>   return (show site)
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Many monads</h1></center>
+    <center>IO is a monad, as are many other things:</center>
+    <ul>
+      <li>Pure mutable state.</li>
+      <li>Immutable state (configuration).</li>
+      <li>Logging (writable state).</li>
+      <li>Parsers.</li>
+      <li>Randomness.</li>
+      <li>Failure with error.</li>
+      <li>&hellip;</li>
+    </ul>
+  </div>
+</div>
