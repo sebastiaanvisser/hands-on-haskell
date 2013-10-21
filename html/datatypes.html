@@ -1,3 +1,9 @@
+<div class=slide>
+  <div class=body>
+    <h1 class=chapter>Data Types</h1>
+  </div>
+</div>
+
 <!-- ======================================================================= -->
 
 <div class=slide>
@@ -137,7 +143,7 @@
       <pre language=haskell data-geom=140,540>
 > myLast :: List a -> Maybe a
       </pre>
-      <pre language=haskell data-geom=40,70>
+      <pre language=haskell data-geom=40,65>
 > ???
       </pre>
   </div>
@@ -190,10 +196,21 @@
     <center><h1>Pattern Matching on lists</h1></center>
       <pre language=haskell data-geom=100,540>
 > and :: [Bool] -> Bool
+      </pre>
+      <pre language=haskell data-geom=139,540>
+> or :: [Bool] -> Bool
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Pattern Matching on lists</h1></center>
+      <pre language=haskell data-geom=100,540>
+> and :: [Bool] -> Bool
 > and []     = True
 > and (x:xs) = x && and xs
       </pre>
-      <hr>
       <pre language=haskell data-geom=,540>
 > or :: [Bool] -> Bool
 > or []     = False
@@ -245,14 +262,50 @@
       <pre language=haskell data-geom=80,580>
 > map :: (a -> b) -> [a] -> [b]
       </pre>
-      <pre language=haskell data-geom=40,70>
+      <pre language=haskell data-geom=40,65>
 > ???
       </pre>
       <pre language=haskell data-geom=,700>
 > filter :: (a -> Bool) -> [a] -> [a]
       </pre>
-      <pre language=haskell data-geom=40,70>
+      <pre language=haskell data-geom=40,65>
 > ???
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Binary tree</h1></center>
+      <pre language=haskell data-geom=100,65>
+> ???
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Binary tree</h1></center>
+      <pre language=haskell data-geom=100,650>
+> data Tree a
+>   = Leaf
+>   | Branch a (Tree a) (Tree a)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Binary tree</h1></center>
+      <pre language=haskell data-geom=100,650>
+> data Tree a
+>   = Leaf
+>   | Branch { value :: a
+>            , left  :: Tree a
+>            , right :: Tree a
+>            }
       </pre>
   </div>
 </div>

@@ -1,3 +1,9 @@
+<div class=slide>
+  <div class=body>
+    <h1 class=chapter>Functions</h1>
+  </div>
+</div>
+
 <!-- ======================================================================= -->
 
 <div class=slide>
@@ -173,11 +179,29 @@
 
 <div class=slide>
   <div class=body>
-    <center><h1>Functions are values</h1></center>
+    <center><h1>Infix functions</h1></center>
       <pre language=haskell data-geom=100,510>
+> > elem 20 [10, 20, 30]
+> True
+      </pre>
+      <hr>
+      <center>Similarly:</center>
+      <pre id=infix0 language=haskell data-geom=,510>
+> > 20 `elem` [10, 20, 30]
+> True
+      </pre>
+  </div>
+</div>
+
+<!-- ======================================================================= -->
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functions are values</h1></center>
+      <pre id=infix1 language=haskell data-geom=100,510>
 > > funs = [ upper
 >          , (== 'a')
->          , elem "xyz"
+>          , (`elem` "xyz")
 >          ]
       </pre>
       <hr>
