@@ -9,7 +9,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Data types</h1></center>
-      <pre language=haskell data-geom=80,680>
+      <pre language=haskell data-geom=80,640>
 > data Person = Person String Int
 >   deriving (Eq, Show)
       </pre>
@@ -31,7 +31,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Record Types</h1></center>
-      <pre language=haskell data-geom=80,680>
+      <pre language=haskell data-geom=80,470>
 > data Person = Person
 >   { name :: String
 >   , age  :: Int
@@ -56,12 +56,12 @@
 > data Pair a = MkPair a a
       </pre>
       <hr>
-      <pre language=haskell data-geom=,520>
+      <pre language=haskell data-geom=,530>
 > > :t MkPair
 > MkPair :: a -> a -> Pair a
       </pre>
       <hr>
-      <pre language=haskell data-geom=,640>
+      <pre language=haskell data-geom=,650>
 > > let total (MkPair a b) = a + b
 > > total (MkPair 15 10)
 > 25
@@ -113,12 +113,12 @@
 <div class=slide>
   <div class=body>
     <center><h1>Recursive Types</h1></center>
-      <pre language=haskell data-geom=100,700>
+      <pre language=haskell data-geom=100,600>
 > data List a = Nil
 >             | Cons a (List a)
       </pre>
       <hr>
-      <pre language=haskell data-geom=100,860>
+      <pre language=haskell data-geom=100,880>
 > let hi = Cons 'h' (Cons 'i' (Cons '!' Nil))
       </pre>
   </div>
@@ -127,7 +127,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Pattern Matching</h1></center>
-      <pre language=haskell data-geom=140,540>
+      <pre language=haskell data-geom=140,550>
 > myHead :: List a -> Maybe a
 > myHead l =
 >   case l of
