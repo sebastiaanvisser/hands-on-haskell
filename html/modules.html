@@ -21,7 +21,7 @@
 <div class=slide>
   <div class=body>
   <center><h1>Hiding Imports</h1></center>
-    <pre language=haskell data-geom=150,740>
+    <pre language=haskell data-geom=150,750>
 > import Data.List hiding (intercalate)
     </pre>
   </div>
@@ -64,13 +64,17 @@
 <div class=slide>
   <div class=body>
   <center><h1>Explicit Exports</h1></center>
-    <pre language=haskell data-geom=140,700>
-> module MyApp.MyModule (f, g) where
+    <pre language=haskell data-geom=60,700>
+> module MyApp.MyModule
+> ( T (..)
+> , f
+> ) where
+>
+> data T = T Int
 > 
 > f = ...
 > g = ...
     </pre>
   </div>
 </div>
-
 
