@@ -1,3 +1,9 @@
+<div class=slide>
+  <div class=body>
+    <h1 class=chapter>Modules</h1>
+  </div>
+</div>
+
 <!-- ====================================================================== -->
 
 <div class=slide>
@@ -6,6 +12,7 @@
     <pre language=haskell data-geom=150,330>
 > import Data.List
     </pre>
+    <center>Modules are hierarchical.</center>
   </div>
 </div>
 
@@ -33,9 +40,9 @@
     <pre language=haskell data-geom=150,660>
 > import qualified Data.List as Ls
     </pre>
-    <pre language=haskell data-geom=100,560>
-> lines :: [String] -> String
-> lines = Ls.intercalate "\n"
+    <pre language=haskell data-geom=100,590>
+> unlines :: [String] -> String
+> unlines = Ls.intercalate "\n"
     </pre>
   </div>
 </div>
@@ -55,7 +62,7 @@
 <div class=slide>
   <div class=body>
   <center><h1>Creating a Module</h1></center>
-    <pre language=haskell data-geom=140,700>
+    <pre language=haskell data-geom=140,550>
 > module MyApp.MyModule where
     </pre>
   </div>
@@ -64,7 +71,7 @@
 <div class=slide>
   <div class=body>
   <center><h1>Explicit Exports</h1></center>
-    <pre language=haskell data-geom=60,700>
+    <pre language=haskell data-geom=60,430>
 > module MyApp.MyModule
 > ( T (..)
 > , f
