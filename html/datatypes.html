@@ -279,6 +279,9 @@
 <div class=slide>
   <div class=body>
     <center><h1>Binary tree</h1></center>
+    <center data-geom=100>
+      <p>With leaf nodes and branch nodes,<br> values only in the branches.</p>
+    </center>
       <pre language=haskell data-geom=100,65>
 > ???
       </pre>
@@ -306,6 +309,124 @@
 >            , left  :: Tree a
 >            , right :: Tree a
 >            }
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=40,65>
+> ???
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = ...
+> eq (Branch v l r) (Branch w x y) = ...
+> eq (Leaf        ) (Branch w x y) = ...
+> eq (Branch v l r) (Leaf        ) = ...
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = True
+> eq (Branch v l r) (Branch w x y) = ...
+> eq (Leaf        ) (Branch w x y) = False
+> eq (Branch v l r) (Leaf        ) = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = True
+> eq (Branch v l r) (Branch w x y) =
+>   v == w && eq l x && eq r y
+> eq (Leaf        ) (Branch w x y) = False
+> eq (Branch v l r) (Leaf        ) = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Eq a => Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = True
+> eq (Branch v l r) (Branch w x y) =
+>   v == w && eq l x && eq r y
+> eq (Leaf        ) (Branch w x y) = False
+> eq (Branch v l r) (Leaf        ) = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Eq a => Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = True
+> eq (Branch v l r) (Branch w x y) =
+>   v == w && eq l x && eq r y
+> eq (Leaf        ) (Branch _ _ _) = False
+> eq (Branch _ _ _) (Leaf        ) = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Eq a => Tree a -> Tree a -> Bool
+      </pre>
+      <pre language=haskell data-geom=,840>
+> eq (Leaf        ) (Leaf        ) = True
+> eq (Branch v l r) (Branch w x y) =
+>   v == w && eq l x && eq r y
+> eq _              _              = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Equality on trees</h1></center>
+      <pre language=haskell data-geom=100,840>
+> eq :: Eq a => Tree a -> Tree a -> Bool
+> eq Leaf Leaf = True
+> eq (Branch v l r) (Branch w x y) =
+>   v == w && eq l x && eq r y
+> eq _ _ = False
       </pre>
   </div>
 </div>
