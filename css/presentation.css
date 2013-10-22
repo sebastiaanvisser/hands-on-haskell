@@ -62,6 +62,11 @@ b
   padding: 20px;
 }
 
+.slide pre.ghci
+{
+  background: #ffe;
+}
+
 .slide pre.shell
 {
   background: black;

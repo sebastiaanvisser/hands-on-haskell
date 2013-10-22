@@ -44,6 +44,18 @@
 </body>
 
 <script>
+// Hack: Add `ghci' class names when applicable. We can (but don't need to)
+// style this slighly different.
+$("pre").each
+( function ()
+  {
+    if ($(this).text().match(/^\s*> >/))
+      $(this).addClass("ghci");
+  }
+);
+</script>
+
+<script>
 // var resolution = [1100,806] // Printable to US-letter in Safari.
 var resolution = [1024,768] // Appropriate for most beamers.
 setupMultislide()
