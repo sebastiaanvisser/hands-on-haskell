@@ -91,6 +91,12 @@ b
   margin: 40px 0;
 }
 
+.slide em
+{
+  color: #c40;
+  font-weight: 500;
+}
+
 .slide a
 {
   color: #046;
@@ -114,7 +120,7 @@ b
   background: white;
   padding: 5px;
   font-size: 110%;
-  color: rgb(199, 0, 143)
+  color: #069;
 }
 
 .slide.titlepage h1
