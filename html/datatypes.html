@@ -14,19 +14,27 @@
 >   deriving (Eq, Show)
       </pre>
       <hr>
+      <pre language=haskell data-geom=,680>
+> > :t Person
+> Person :: String -> Int -> Person
+      </pre>
+      <hr>
       <pre language=haskell data-geom=,400>
 > > Person "Alice" 25
 > Person "Alice" 25
       </pre>
-      <hr>
-      <pre language=haskell data-geom=,670>
-> > :t Person
-> Person :: String -> Int -> Person
-      </pre>
   </div>
 </div>
 
-<!-- ======================================================================= -->
+<div class=slide>
+  <div class=body>
+    <center><h1>Type synonyms</h1></center>
+      <pre language=haskell data-geom=120,400>
+> type Name = String
+      </pre>
+      <center>Just aliases.</center>
+  </div>
+</div>
 
 <div class=slide>
   <div class=body>
@@ -140,7 +148,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Implementing <code>last</code></h1></center>
-      <pre language=haskell data-geom=140,540>
+      <pre language=haskell data-geom=140,550>
 > myLast :: List a -> Maybe a
       </pre>
       <pre language=haskell data-geom=40,65>
@@ -152,7 +160,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Implementing <code>last</code></h1></center>
-      <pre language=haskell data-geom=140,540>
+      <pre language=haskell data-geom=140,550>
 > myLast :: List a -> Maybe a
 > myLast l =
 >   case l of
@@ -166,7 +174,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Implementing <code>last</code></h1></center>
-      <pre language=haskell data-geom=140,540>
+      <pre language=haskell data-geom=140,550>
 > myLast :: List a -> Maybe a
 > myLast l =
 >   case l of
@@ -214,7 +222,7 @@
       <pre language=haskell data-geom=,540>
 > or :: [Bool] -> Bool
 > or []     = False
-> or (x:xs) = x || and xs
+> or (x:xs) = x || or xs
       </pre>
   </div>
 </div>
@@ -222,19 +230,19 @@
 <div class=slide>
   <div class=body>
     <center><h1>Generalizing list functions</h1></center>
-      <pre language=haskell data-geom=60,540>
-> and []     = True
-> or  []     = False
+      <pre language=haskell data-geom=20,540>
+> and [] = True
+> or  [] = False
       </pre>
-      <pre language=haskell data-geom=-45,540>
+      <pre language=haskell data-geom=-35,540>
 > and (x:xs) = x && and xs
 > or  (x:xs) = x || or  xs
       </pre>
       <hr>
       <center>Combine function <code>f</code> + default case <code>d</code>:</center>
-      <pre language=haskell data-geom=,660>
+      <pre language=haskell data-geom=,670>
 > gen _ d []     = d
-> gen f d (x:xs) = f x (gen f d xs)
+> gen f d (x:xs) = x `f` gen f d xs
       </pre>
   </div>
 </div>
@@ -258,12 +266,35 @@
 
 <div class=slide>
   <div class=body>
+    <center><h1>More folds</h1></center>
+      <pre language=haskell data-geom=80,840>
+> sum         = foldr (+) 0
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=-80,840>
+> product     = foldr (*) 1
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=-80,840>
+> concat      = foldr (++) []
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=-80,840>
+> identity    = foldr (:) []
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=-80,840>
+> reverse     = foldr (\a b -> b ++ [a]) []
+      </pre>
+      <center>And many more!</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
     <center><h1>List Functions</h1></center>
       <pre language=haskell data-geom=80,580>
 > map :: (a -> b) -> [a] -> [b]
-      </pre>
-      <pre language=haskell data-geom=40,65>
-> ???
       </pre>
       <pre language=haskell data-geom=,700>
 > filter :: (a -> Bool) -> [a] -> [a]
@@ -271,8 +302,28 @@
       <pre language=haskell data-geom=40,65>
 > ???
       </pre>
+      <center>Either use direct recursion,<br> or use <code>foldr</code>.<center>
   </div>
 </div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Map and filter</h1></center>
+      <pre language=haskell data-geom=60,740>
+> map :: (a -> b) -> [a] -> [b]
+> map f = foldr (\a b -> f a : b) []
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=0,740>
+> filter :: (a -> Bool) -> [a] -> [a]
+> filter p = foldr step []
+>   where step a b = if p a
+>                    then a : b
+>                    else b
+      </pre>
+  </div>
+</div>
+
 
 <!-- ======================================================================= -->
 
