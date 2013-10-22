@@ -9,11 +9,11 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell data-geom=70,840>
-> > let upper c = (c >= 'A') && (c <= 'Z')
+      <pre language=haskell data-geom=100,690>
+> upper c = (c >= 'A') && (c <= 'Z')
       </pre>
       <hr>
-      <pre language=haskell data-geom=,500>
+      <pre language=haskell data-geom=,440>
 > > :t upper
 > upper :: Char -> Bool
       </pre>
@@ -24,7 +24,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell data-geom=100,720>
+      <pre language=haskell data-geom=100,690>
 > upper :: Char -> Bool
 > upper c = (c >= 'A') && (c <= 'Z')
       </pre>
@@ -36,7 +36,7 @@
 <div class=slide>
   <div class=body>
     <center><h1>Function Application</h1></center>
-      <pre language=haskell data-geom=100,300>
+      <pre language=haskell data-geom=100,240>
 > > upper 'a'
 > False
       </pre>
@@ -66,8 +66,8 @@
 <div class=slide>
   <div class=body>
     <center><h1>Multiple Arguments</h1></center>
-      <pre language=haskell data-geom=100,760>
-> > let both a b = upper a && upper b
+      <pre language=haskell data-geom=100,580>
+> both a b = upper a && upper b
       </pre>
       <hr>
       <pre language=haskell data-geom=,600>
@@ -98,16 +98,29 @@
   </div>
 </div>
 
+<div class=slide>
+  <div class=body>
+    <center><h1>Currying</h1></center>
+    <pre language=haskell data-geom=100,610>
+> both :: Char ->  Char -> Bool
+> both :: Char -> (Char -> Bool)
+    </pre>
+    <center data-geom=80>
+    Application associates to the left,<br> function arrows to the right.
+    <center>
+  </div>
+</div>
+
 <!-- ======================================================================= -->
 
 <div class=slide>
   <div class=body>
     <center><h1>Input tuples</h1></center>
-      <pre language=haskell data-geom=120,780>
-> > let both (a, b) = upper a && upper b
+      <pre language=haskell data-geom=120,650>
+> both (a, b) = upper a && upper b
       </pre>
       <hr>
-      <pre language=haskell data-geom=80,600>
+      <pre language=haskell data-geom=80,580>
 > > :t both
 > both :: (Char, Char) -> Bool
       </pre>
@@ -130,12 +143,12 @@
 <div class=slide>
   <div class=body>
     <center><h1>Operators are functions</h1></center>
-      <pre language=haskell data-geom=60,380>
+      <pre language=haskell data-geom=60,350>
 > > True && False
 > False
       </pre>
       <hr>
-      <pre language=haskell data-geom=,380>
+      <pre language=haskell data-geom=,350>
 > > (&&) True False
 > False
       </pre>
@@ -198,14 +211,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions are values</h1></center>
-      <pre id=infix1 language=haskell data-geom=100,510>
-> > funs = [ upper
->          , (== 'a')
->          , (`elem` "xyz")
->          ]
+      <pre id=infix1 language=haskell data-geom=100,460>
+> funs = [ upper
+>        , (== 'a')
+>        , (`elem` "xyz")
+>        ]
       </pre>
       <hr>
-      <pre language=haskell data-geom=,510>
+      <pre language=haskell data-geom=,440>
 > > :t funs
 > funs :: [Char -> Bool]
       </pre>
@@ -217,8 +230,10 @@
 <div class=slide>
   <div class=body>
     <center><h1>Polymorphism</h1></center>
-      <pre language=haskell data-geom=100,600>
-> > let swap t = (snd t, fst t)
+      <pre language=haskell data-geom=100,470>
+> swap t = (snd t, fst t)
+      </pre>
+      <pre language=haskell data-geom=,260>
 > > swap (1, 2)
 > (2,1)
       </pre>
@@ -247,8 +262,8 @@
 <div class=slide>
   <div class=body>
     <center><h1>Polymorphism</h1></center>
-      <pre language=haskell data-geom=100,540>
-> > let fn t = ('a', snd t)
+      <pre language=haskell data-geom=100,400>
+> fn t = ('a', snd t)
       </pre>
       <hr>
       <pre language=haskell data-geom=,540>
@@ -261,11 +276,11 @@
 <div class=slide>
   <div class=body>
     <center><h1>Pattern matching</h1></center>
-      <pre language=haskell data-geom=100,540>
-> > let swap (f, s) = (s, f)
+      <pre language=haskell data-geom=100,400>
+> swap (f, s) = (s, f)
       </pre>
       <hr>
-      <pre language=haskell data-geom=,540>
+      <pre language=haskell data-geom=,500>
 > > :t swap
 > swap :: (a, b) -> (b, a)
       </pre>
@@ -286,18 +301,86 @@
 <div class=slide>
   <div class=body>
     <center><h1>Higher order functions</h1></center>
-      <pre language=haskell data-geom=80,680>
-> > let twice f (a, b) = (f a, f b)
+      <pre language=haskell data-geom=80,510>
+> twice f a b = (f a, f b)
       </pre>
       <hr>
-      <pre language=haskell data-geom=,400>
-> > twice (*2) (2, 3)
+      <pre language=haskell data-geom=,350>
+> > twice (*2) 2 3
 > (4, 6)
       </pre>
       <hr>
+      <pre language=haskell data-geom=,230>
+> > :t twice
+> ???
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Higher order functions</h1></center>
+      <pre language=haskell data-geom=80,510>
+> twice f a b = (f a, f b)
+      </pre>
+      <pre language=haskell data-geom=,350>
+> > twice (*2) 2 3
+> (4, 6)
+      </pre>
       <pre language=haskell data-geom=,760>
 > > :t twice
-> twice :: (a -> b) -> (a, a) -> (b, b)
+> twice :: ? -> ? -> ? -> ?
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Higher order functions</h1></center>
+      <pre language=haskell data-geom=80,510>
+> twice f a b = (f a, f b)
+      </pre>
+      <pre language=haskell data-geom=,350>
+> > twice (*2) 2 3
+> (4, 6)
+      </pre>
+      <pre language=haskell data-geom=,760>
+> > :t twice
+> twice :: (? -> ?) -> ? -> ? -> (?, ?)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Higher order functions</h1></center>
+      <pre language=haskell data-geom=80,510>
+> twice f a b = (f a, f b)
+      </pre>
+      <pre language=haskell data-geom=,350>
+> > twice (*2) 2 3
+> (4, 6)
+      </pre>
+      <pre language=haskell data-geom=,760>
+> > :t twice
+> twice :: (a -> b) -> ? -> ? -> (?, ?)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Higher order functions</h1></center>
+      <pre language=haskell data-geom=80,510>
+> twice f a b = (f a, f b)
+      </pre>
+      <pre language=haskell data-geom=,350>
+> > twice (*2) 2 3
+> (4, 6)
+      </pre>
+      <pre language=haskell data-geom=,760>
+> > :t twice
+> twice :: (a -> b) -> a -> a -> (b, b)
       </pre>
   </div>
 </div>
