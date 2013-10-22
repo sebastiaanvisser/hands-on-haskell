@@ -11,7 +11,7 @@
   <div class=body>
     <center><h1>Preliminaties</h1></center>
     <center>Start GHCi:</center>
-    <pre class=shell style="font-size: 26px; line-height: 42px">
+    <pre class=shell style="font-size: 26px; line-height: 42px;width: 800px">
 > ghci
 GHCi, version 7.6.1: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
@@ -26,7 +26,7 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Numbers</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=50,300>
 > > 1
 > 1
 > > 1 + 1
@@ -34,7 +34,7 @@ Prelude></pre>
 > > 2 * (3.1 - 1)
 > 4.2
     </pre>
-      <center>Also: <code>(-), div, mod, (/)</code>, &hellip;</center>
+      <center>Also: <code>(-)</code>, <code>div</code>, <code>mod</code>, <code>(/)</code>, &hellip;</center>
       <hr>
       <center>Q: what is 56088 divided by 456?</center>
   </div>
@@ -43,7 +43,7 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Bindings</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=50,230>
 > > let x = 1
 > > x + x
 > 2
@@ -58,20 +58,22 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Files</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=60,200>
 > x = 1
 > y = x + 2
     </pre>
-    <center>Save this with extension <code>.hs</code>.</center><br>
-    <center>Load in GHCi with <code>ghci &lt;filename&gt;</code></center><br>
-    <center>Reload with <code>:r</code></center>
+    <center data-geom=80>
+      <p>Save this with extension <code>.hs</code>.</p>
+      <p>Load in GHCi with <code>ghci &lt;filename&gt;</code></p>
+      <p>Reload with <code>:r</code></p>
+    </center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Booleans</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=80,500>
 > > True
 > True
 > > not True
@@ -85,13 +87,13 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Application</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,220>
 > > not True
 > False
     </pre>
     <center>Application with space.</center>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,180>
 > > min 1 2
 > 1
     </pre>
@@ -102,36 +104,41 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>If-then-else</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=80,460>
 > > if True then 1 else 2
 > 1
     </pre>
-      <center>This is an <em>expression</em>: you cannot leave out a branch.</center>
-      <center>C.f. ternary operator.</center>
+    <center data-geom=80>
+      <p>This is an <em>expression</em>:<br>you cannot leave out a branch.</p>
+      <p>C.f. ternary operator.</p>
+    </center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Types</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=60,380>
 > > :t True
 > True :: Bool
 > > :t not
 > not :: Bool -> Bool
     </pre>
-      <hr>
-      <center>Q: What is the type of <code>(&&)</code>?<center><br>
-      <center>Bonus: Look at the type of <code>(+)</code>.</center>
+    <hr>
+    <center data-geom=80>
+      <p>Q: What is the type of <code>(&&)</code>?</p>
+      <p>Bonus: Look at the type of <code>(+)</code>.</p>
+    </center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Type errors</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,790>
 > > if not then True else False
->
+    </pre>
+    <pre language=haskell data-geom=,790>
 > &lt;interactive&gt;:1:4:
 >     Couldn't match expected type `Bool'
 >       with actual type `Bool -> Bool'
@@ -145,24 +152,27 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Type classes</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=80,300>
 > > :t 1
 > 1 :: Num a => a
     </pre>
     <hr>
-    <center><code>Num</code> is a <em>type class</em>.</center><br>
-    <center>Says: <code>1</code> can be any type that is numeric.</center><br>
-    <hr>
-    <center>Q: Explain the type of (+).</center>
+    <center data-geom=80>
+      <p><code>Num</code> is a <em>type class</em>.</p>
+      <p>Says: <code>1</code> can be any type that is numeric.</p>
+      <hr>
+      <p>Q: Explain the type of (+).</p>
+    </center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Type class errors</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,200>
 > > 1 + True
->
+    </pre>
+    <pre language=haskell>
 > &lt;interactive&gt;:25:3:
 >     No instance for (Num Bool) arising from
 >       a use of `+'
@@ -177,11 +187,11 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Number types</h1></center>
-    <table>
+    <table data-geom=80,660 style="margin: 80px auto">
     <tr><td>Integral:</td> <td><code>Integer, Int</code></td></tr>
     <tr><td>Floating:</td> <td><code>Double, Float</code></td></tr>
     <tr><td>Fractional:</td> <td><code>Rational</code></td></tr>
-    <tr><td>Fixed size:</td> <td><code style="font-size: 80%">Int8 ... Int64, Word8 ... Word64</code></td></tr>
+    <tr><td>Fixed size:</td> <td><code style="font-size: 80%">Int8 ... Int64,<br> Word8 ... Word64</code></td></tr>
     </table>
   </div>
 </div>
@@ -189,7 +199,7 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Characters and strings</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=80,470>
 > > :t 'c'
 > 'c' :: Char
 > > :t "Hello world"
@@ -205,7 +215,7 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Lists</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,600>
 > > :t [True, True, False]
 > [True, True, False] :: [Bool]
 > > :t []
@@ -216,24 +226,24 @@ Prelude></pre>
 > [1,2,3,4,5,6]
     </pre>
     <hr>
-    <center>Q: Try to make a list containing one, two and false.</center>
+    <center>Q: Try to make a list<br> containing one, two and false.</center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>List functions</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,320>
 > > length [1,4,7]
 > 3
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,320>
 > > take 3 [1..10]
 > [1,2,3]
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,360>
 > > drop 3 [10,9..1]
 > [7,6,5,4,3,2,1]
     </pre>
@@ -243,17 +253,17 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>List functions - 2</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,300>
 > > head [4,5,6]
 > 4
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,300>
 > > tail [4,5,6]
 > [5,6]
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,330>
 > > elem 3 [1,2,4]
 > False
     </pre>
@@ -263,17 +273,17 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Infinite lists</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,240>
 > > head [1..]
 > 1
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,510>
 > > take 10 (cycle [1,2,3])
 > [1,2,3,1,2,3,1,2,3,1]
     </pre>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,490>
 > > head (tail (repeat 2))
 > 2
     </pre>
@@ -283,22 +293,24 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Equality</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=100,400>
 > > 1 == 1
 > True
 > > [1,2,3] /= [1,2,4]
 > True
     </pre>
     <hr>
-    <center>Works on most types.</center>
-    <center>Q: what is the type of <code>(==)</code>?</center>
+    <center>
+    <p>Works on most types.</p>
+    <p>Q: what is the type of <code>(==)</code>?</p>
+    </center>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
     <center><h1>Comparison</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,400>
 > > 1 > 2
 > False
 > > [1,2,3] < [1,2,4]
@@ -306,7 +318,7 @@ Prelude></pre>
     </pre>
     <center>Also <code>(&lt;=), (&gt;=)</code>.</center>
     <hr>
-    <pre language=haskell>
+    <pre language=haskell data-geom=,610>
 > > :t (<)
 > (<) :: Ord a => a -> a -> Bool
     </pre>
