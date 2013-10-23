@@ -11,7 +11,7 @@
   <div class=body>
     <center><h1>Preliminaties</h1></center>
     <center>Start GHCi:</center>
-    <pre class=shell style="font-size: 26px; line-height: 42px;width: 800px">
+    <pre class=shell style="font-size: 26px; line-height: 42px;width: 830px">
 > ghci
 GHCi, version 7.6.1: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
@@ -233,12 +233,12 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>List functions</h1></center>
-    <pre language=haskell data-geom=,320>
+    <pre language=haskell data-geom=,360>
 > > length [1,4,7]
 > 3
     </pre>
     <hr>
-    <pre language=haskell data-geom=,320>
+    <pre language=haskell data-geom=,360>
 > > take 3 [1..10]
 > [1,2,3]
     </pre>
@@ -253,12 +253,12 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>List functions - 2</h1></center>
-    <pre language=haskell data-geom=,300>
+    <pre language=haskell data-geom=,330>
 > > head [4,5,6]
 > 4
     </pre>
     <hr>
-    <pre language=haskell data-geom=,300>
+    <pre language=haskell data-geom=,330>
 > > tail [4,5,6]
 > [5,6]
     </pre>
@@ -273,7 +273,7 @@ Prelude></pre>
 <div class=slide>
   <div class=body>
     <center><h1>Infinite lists</h1></center>
-    <pre language=haskell data-geom=,240>
+    <pre language=haskell data-geom=,510>
 > > head [1..]
 > 1
     </pre>
@@ -283,7 +283,7 @@ Prelude></pre>
 > [1,2,3,1,2,3,1,2,3,1]
     </pre>
     <hr>
-    <pre language=haskell data-geom=,490>
+    <pre language=haskell data-geom=,510>
 > > head (tail (repeat 2))
 > 2
     </pre>
