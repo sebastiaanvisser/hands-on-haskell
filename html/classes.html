@@ -73,6 +73,20 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functor</h1></center>
+    <pre language=haskell data-geom=100>
+> class Functor f where
+>   fmap :: (a -> b) -> f a -> f b
+    </pre>
+    <center>
+      <p>Q: Define a binary tree with values in the branches.</p>
+      <p>Q: Give an instance Functor Tree.</p>
+    </center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
     <pre language=haskell>
 > data Tree a
 >   = Leaf
