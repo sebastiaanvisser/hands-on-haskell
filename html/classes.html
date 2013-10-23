@@ -60,15 +60,79 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functor</h1></center>
-    <pre language=haskell>
+    <pre language=haskell data-geom=100>
 > class Functor f where
 >   fmap :: (a -> b) -> f a -> f b
     </pre>
     <hr>
     <center>Generalizes list's <code>map</code>.</center><br>
     <center>Instances for <code>Maybe, [], IO</code>, &hellip;</center><br>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
+    <pre language=haskell>
+> data Tree a
+>   = Leaf
+>   | Branch (Tree a) a (Tree a)
+    </pre>
     <hr>
-    <center>Q: Write an instance for your <code>Tree</code> type.</center>
+    <pre language=haskell>
+> instance Functor Tree where
+>   fmap f Leaf           = &hellip;
+>   fmap f (Branch l x r) = &hellip;
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
+    <pre language=haskell>
+> data Tree a
+>   = Leaf
+>   | Branch (Tree a) a (Tree a)
+    </pre>
+    <pre language=haskell>
+> instance Functor Tree where
+>   fmap f Leaf           = Leaf
+>   fmap f (Branch l x r) = Branch &hellip;
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
+    <pre language=haskell>
+> data Tree a
+>   = Leaf
+>   | Branch (Tree a) a (Tree a)
+    </pre>
+    <pre language=haskell>
+> instance Functor Tree where
+>   fmap f Leaf           = Leaf
+>   fmap f (Branch l x r) = Branch ? (f x) ?
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Functor</h1></center>
+    <pre language=haskell>
+> data Tree a
+>   = Leaf
+>   | Branch (Tree a) a (Tree a)
+    </pre>
+    <pre language=haskell>
+> instance Functor Tree where
+>   fmap f Leaf           = Leaf
+>   fmap f (Branch l x r) =
+>     Branch (fmap f l) (f x) (fmap f r)
+    </pre>
   </div>
 </div>
 
