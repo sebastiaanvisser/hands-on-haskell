@@ -9,19 +9,29 @@
 <div class=slide>
   <div class=body>
     <center><h1>Data types</h1></center>
-      <pre language=haskell data-geom=80,640>
+      <pre language=haskell data-geom=80,660>
+> data Person = MkPerson String Int
+>   deriving Show
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,700>
+> > :t MkPerson
+> MkPerson :: String -> Int -> Person
+      </pre>
+      <hr>
+      <pre language=haskell data-geom=,420>
+> > MkPerson "Alice" 25
+> MkPerson "Alice" 25
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Data types</h1></center>
+    <center>Types and constructors don't clash:</center>
+      <pre language=haskell data-geom=80,620>
 > data Person = Person String Int
->   deriving (Eq, Show)
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=,680>
-> > :t Person
-> Person :: String -> Int -> Person
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=,400>
-> > Person "Alice" 25
-> Person "Alice" 25
       </pre>
   </div>
 </div>
@@ -41,9 +51,9 @@
     <center><h1>Record Types</h1></center>
       <pre language=haskell data-geom=80,470>
 > data Person = Person
->   { name :: String
+>   { name :: Name
 >   , age  :: Int
->   } deriving (Eq, Show)
+>   } deriving Show
       </pre>
       <hr>
       <pre language=haskell data-geom=,500>
@@ -202,11 +212,15 @@
 <div class=slide>
   <div class=body>
     <center><h1>Pattern Matching on lists</h1></center>
-      <pre language=haskell data-geom=100,540>
+      <center>Pattern match on <code>[]</code> and <code>:</code></center>
+      <pre language=haskell data-geom=50,540>
 > and :: [Bool] -> Bool
+> and []     = ...
+> and (x:xs) = ...
       </pre>
-      <pre language=haskell data-geom=139,540>
+      <pre language=haskell data-geom=,540>
 > or :: [Bool] -> Bool
+> ...
       </pre>
   </div>
 </div>
@@ -214,7 +228,8 @@
 <div class=slide>
   <div class=body>
     <center><h1>Pattern Matching on lists</h1></center>
-      <pre language=haskell data-geom=100,540>
+      <center>Pattern match on <code>[]</code> and <code>:</code></center>
+      <pre language=haskell data-geom=50,540>
 > and :: [Bool] -> Bool
 > and []     = True
 > and (x:xs) = x && and xs
@@ -267,24 +282,30 @@
 <div class=slide>
   <div class=body>
     <center><h1>More folds</h1></center>
-      <pre language=haskell data-geom=80,840>
-> sum         = foldr (+) 0
+      <pre language=haskell data-geom=40,780>
+> and      = foldr (&&) True
+> or       = foldr (||) False
+> sum      = foldr ...
+> product  = foldr ...
+> concat   = foldr ...
+> identity = foldr ...
+> reverse  = foldr ...
       </pre>
-      <hr>
-      <pre language=haskell data-geom=-80,840>
-> product     = foldr (*) 1
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=-80,840>
-> concat      = foldr (++) []
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=-80,840>
-> identity    = foldr (:) []
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=-80,840>
-> reverse     = foldr (\a b -> b ++ [a]) []
+      <center>Q: Can you implement these as folds?</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>More folds</h1></center>
+      <pre language=haskell data-geom=40,780>
+> and      = foldr (&&) True
+> or       = foldr (||) False
+> sum      = foldr (+) 0
+> product  = foldr (*) 1
+> concat   = foldr (++) []
+> identity = foldr (:) []
+> reverse  = foldr (\a b -> b ++ [a]) []
       </pre>
       <center>And many more!</center>
   </div>
@@ -308,14 +329,30 @@
 
 <div class=slide>
   <div class=body>
-    <center><h1>Map and filter</h1></center>
+    <center><h1>Map</h1></center>
+      <pre language=haskell data-geom=120,740>
+> map _ []     = []
+> map f (x:xs) = f x : map f xs
+      </pre>
+      <hr>
       <pre language=haskell data-geom=60,740>
-> map :: (a -> b) -> [a] -> [b]
 > map f = foldr (\a b -> f a : b) []
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>filter</h1></center>
+      <pre language=haskell data-geom=20,740>
+> filter _ []     = []
+> filter p (x:xs) =
+>   if p x
+>   then x : filter p xs
+>   else filter p xs
       </pre>
       <hr>
       <pre language=haskell data-geom=0,740>
-> filter :: (a -> Bool) -> [a] -> [a]
 > filter p = foldr step []
 >   where step a b = if p a
 >                    then a : b
@@ -323,3 +360,4 @@
       </pre>
   </div>
 </div>
+

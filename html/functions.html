@@ -54,10 +54,12 @@
 <div class=slide>
   <div class=body>
     <center><h1>Application Precedence</h1></center>
-    <center data-geom=100>so:</center>
-    <pre language=haskell data-geom=,260>> print (1 + 2)</pre>
+    <center data-geom=70>so:</center>
+    <pre language=haskell data-geom=,230>> not (1 > 2)</pre>
     <center>and not:</center>
-    <pre language=haskell style=text-decoration:line-through data-geom=,230>> print 1 + 2</pre>
+    <pre language=haskell style=text-decoration:line-through data-geom=,200>> not 1 > 2</pre>
+    <hr>
+    <p>Q: What happens when you try <code>not 1 + 2</code>?</p>
   </div>
 </div>
 
@@ -101,29 +103,85 @@
 <div class=slide>
   <div class=body>
     <center><h1>Currying</h1></center>
-    <pre language=haskell data-geom=100,610>
+    <pre language=haskell data-geom=120,610>
 > both :: Char ->  Char -> Bool
 > both :: Char -> (Char -> Bool)
     </pre>
     <center data-geom=80>
     Application associates to the left,<br> function arrows to the right.
-    <center>
+    </center>
   </div>
 </div>
 
-<!-- ======================================================================= -->
+<div class=slide>
+  <div class=body>
+    <center><h1>Currying</h1></center>
+    <center data-geom=50>
+    Q: What would be the type of:
+    </center>
+    <pre language=haskell data-geom=60,650>
+> side :: ???
+> side c = if c
+>          then head
+>          else last
+    </pre>
+    <pre language=haskell data-geom=40,650>
+> head, last :: [Char] -> Char
+    </pre>
+  </div>
+</div>
 
 <div class=slide>
   <div class=body>
-    <center><h1>Input tuples</h1></center>
-      <pre language=haskell data-geom=120,650>
-> both (a, b) = upper a && upper b
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=80,580>
-> > :t both
-> both :: (Char, Char) -> Bool
-      </pre>
+    <center><h1>Currying</h1></center>
+    <center data-geom=50>
+    Q: What would be the type of:
+    </center>
+    <pre language=haskell data-geom=60,650>
+> side :: Bool -> ([Char] -> Char)
+> side c = if c
+>          then head
+>          else last
+    </pre>
+    <pre language=haskell data-geom=40,650>
+> head, last :: [Char] -> Char
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Currying</h1></center>
+    <center data-geom=50>
+    Q: What would be the type of:
+    </center>
+    <pre language=haskell data-geom=60,650>
+> side :: Bool -> [Char] -> Char
+> side c = if c
+>          then head
+>          else last
+    </pre>
+    <pre language=haskell data-geom=40,650>
+> head, last :: [Char] -> Char
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Currying</h1></center>
+    <center data-geom=50>
+    Q: What would be the type of:
+    </center>
+    <pre language=haskell data-geom=60,650>
+> side :: Bool -> [Char] -> Char
+> side c a = if c
+>            then head a
+>            else last a
+    </pre>
+    <pre language=haskell data-geom=40,650>
+> head, last :: [Char] -> Char
+    </pre>
   </div>
 </div>
 
@@ -132,9 +190,31 @@
 <div class=slide>
   <div class=body>
     <center><h1>Lambda expressions</h1></center>
-      <pre language=haskell data-geom=220,530>
-> \a b -> upper a && upper b
+      <pre language=haskell data-geom=120,670>
+> both a b = upper a && upper b
       </pre>
+      <pre language=haskell data-geom=20,670>
+> ???
+      </pre>
+      <pre language=haskell data-geom=20,670>
+> both = \a b -> upper a && upper b
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Lambda expressions</h1></center>
+      <pre language=haskell data-geom=120,670>
+> both a b = upper a && upper b
+      </pre>
+      <pre language=haskell data-geom=20,670>
+> both a = \b -> upper a && upper b
+      </pre>
+      <pre language=haskell data-geom=20,670>
+> both = \a b -> upper a && upper b
+      </pre>
+      <center>All equivalent.</center>
   </div>
 </div>
 
@@ -156,6 +236,41 @@
       <pre language=haskell data-geom=,580>
 > > :t (&&)
 > (&&) :: Bool -> Bool -> Bool
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Just functions</h1></center>
+      <pre language=haskell data-geom=140,560>
+> (&&) :: Bool -> Bool -> Bool
+> (&&) True  True  = True
+> (&&) False True  = False
+> (&&) True  False = False
+> (&&) False False = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Just functions</h1></center>
+      <pre language=haskell data-geom=140,560>
+> (&&) :: Bool -> Bool -> Bool
+> (&&) True  True  = True
+> (&&) _     _     = False
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Implementation</h1></center>
+      <pre language=haskell data-geom=140,560>
+> (&&) :: Bool -> Bool -> Bool
+> True && True = True
+> _    && _    = False
       </pre>
   </div>
 </div>
@@ -211,12 +326,13 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions are values</h1></center>
-      <pre id=infix1 language=haskell data-geom=100,460>
+      <pre id=infix1 language=haskell data-geom=60,460>
 > funs = [ upper
 >        , (== 'a')
 >        , (`elem` "xyz")
 >        ]
       </pre>
+      <center>Q: What is the type?</center>
       <hr>
       <pre language=haskell data-geom=,440>
 > > :t funs
@@ -261,28 +377,10 @@
 
 <div class=slide>
   <div class=body>
-    <center><h1>Polymorphism</h1></center>
-      <pre language=haskell data-geom=100,400>
-> fn t = ('a', snd t)
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=,540>
-> > :t fn
-> fn :: (a, b) -> (Char, b)
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
     <center><h1>Pattern matching</h1></center>
-      <pre language=haskell data-geom=100,400>
-> swap (f, s) = (s, f)
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=,500>
-> > :t swap
+      <pre language=haskell data-geom=150,480>
 > swap :: (a, b) -> (b, a)
+> swap (f, s) = (s, f)
       </pre>
   </div>
 </div>
@@ -293,7 +391,7 @@
   <div class=body>
     <center>
       <h1>Higher order functions</h1>
-      <p data-geom=160>Functions that take <br>ohter functions as arguments.</p>
+      <p data-geom=160>Functions that take <br>other functions as arguments.</p>
     </center>
   </div>
 </div>
@@ -385,76 +483,103 @@
   </div>
 </div>
 
+<div class=slide>
+  <div class=body>
+    <center><h1>Specialization</h1></center>
+      <pre language=haskell data-geom=80,740>
+> upper :: Char -> Bool
+> twice :: (a -> b) -> a -> a -> (b, b)
+      </pre>
+      <pre language=haskell data-geom=40,860>
+> > :t twice upper
+> twice upper :: ???
+      </pre>
+      <center data-geom=80>Q: What is the type?</center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Specialization</h1></center>
+      <pre language=haskell data-geom=80,740>
+> upper :: Char -> Bool
+> twice :: (a -> b) -> a -> a -> (b, b)
+      </pre>
+      <pre language=haskell data-geom=40,860>
+> > :t twice upper
+> twice upper :: Char -> Char -> (Bool, Bool)
+      </pre>
+      <center data-geom=80>Q: What is the type?</center>
+  </div>
+</div>
+
 <!-- ======================================================================= -->
 
 <div class=slide>
   <div class=body>
-    <center><h1>Identity</h1></center>
-      <pre language=haskell data-geom=120,260>
+    <center><h1>Basic functions</h1></center>
+      <pre language=haskell data-geom=60,750>
+> id :: ???
+> id a = a
+      </pre>
+      <pre language=haskell data-geom=20,750>
+> const ???
+> const a b = a
+      </pre>
+      <pre language=haskell data-geom=20,750>
+> flip :: ???
+> flip f a b = f b a
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Basic functions</h1></center>
+      <pre language=haskell data-geom=60,750>
 > id :: a -> a
+> id a = a
       </pre>
-      <pre language=haskell data-geom=,140>
-> > id 1
-> 1
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Constant</h1></center>
-      <pre language=haskell data-geom=120,420>
+      <pre language=haskell data-geom=20,750>
 > const :: a -> b -> a
+> const a b = a
       </pre>
-      <pre language=haskell data-geom=,320>
-> > const 'a' 'b'
-> 'a'
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Flipping Arguments</h1></center>
-      <pre language=haskell data-geom=120,750>
+      <pre language=haskell data-geom=20,750>
 > flip :: (a -> b -> c) -> b -> a -> c
-      </pre>
-      <pre language=haskell data-geom=,340>
-> > flip (-) 10 5
-> -5
+> flip f a b = f b a
       </pre>
   </div>
 </div>
 
 <div class=slide>
   <div class=body>
-    <center><h1>Application</h1></center>
-      <pre language=haskell data-geom=120,520>
+    <center><h1>Basic functions</h1></center>
+      <center>Application as operator:</center>
+      <pre language=haskell data-geom=60,750>
+> ($) :: ???
+> ($) f a = f a
+      </pre>
+      <center>Composition:</center>
+      <pre language=haskell data-geom=0,750>
+> (.) :: ???
+> (.) f g a = f (g a)
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Basic functions</h1></center>
+      <center>Application as operator:</center>
+      <pre language=haskell data-geom=60,750>
 > ($) :: (a -> b) -> a -> b
+> ($) f a = f a
       </pre>
-      <pre language=haskell data-geom=,680>
-> > print $ id $ const 2 $ (*3) $ 4
-> 2
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Composition</h1></center>
-      <pre language=haskell data-geom=120,760>
+      <center>Composition:</center>
+      <pre language=haskell data-geom=0,750>
 > (.) :: (b -> c) -> (a -> b) -> a -> c
-      </pre>
-      <pre language=haskell data-geom=,510>
-> > (fst . snd) (1, (2, 3))
-> 2
+> (.) f g a = f (g a)
       </pre>
   </div>
 </div>
-
-
-
-
-
-
 
