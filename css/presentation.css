@@ -109,7 +109,7 @@ b
   text-decoration: none;
 }
 
-.slide a[href]:after
+.slide:not(.nohrefs) a[href]:after
 {
   content: " (" attr(href) ")";
   font-size: 80%;
