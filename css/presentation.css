@@ -37,6 +37,7 @@ b
   font-weight: normal;
   color: #057;
   font-size: 60px;
+  text-transform: capitalize;
 }
 
 .slide .chapter
