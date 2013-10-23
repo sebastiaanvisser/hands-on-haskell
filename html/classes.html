@@ -77,9 +77,9 @@
     <center><h1>Nested Maybes</h1></center>
     <center data-geom=160>Imagine web application where users can have accounts and sites.</center>
     <pre language=haskell>
-> parseSessionId :: String -> Maybe SessionId
-> lookupUser :: SessionId -> Maybe User
-> getUserSite :: User -> Maybe Site
+> parseSessionId :: String    -> Maybe SessionId
+> lookupUser     :: SessionId -> Maybe User
+> getUserSite    :: User      -> Maybe Site
     </pre>
   </div>
 </div>
