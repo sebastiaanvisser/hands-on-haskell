@@ -108,7 +108,7 @@ b
   text-decoration: none;
 }
 
-.slide a:after
+.slide a[href]:after
 {
   content: " (" attr(href) ")";
   font-size: 80%;
