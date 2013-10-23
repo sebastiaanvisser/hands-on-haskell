@@ -292,6 +292,38 @@ Prelude></pre>
 
 <div class=slide>
   <div class=body>
+    <center><h1>Tuples</h1></center>
+    <pre language=haskell data-geom=70>
+> > :t (True, 'c')
+> (True, 'c') :: (Bool, Char)
+    </pre>
+    <pre language=haskell>
+> > :t (True, 'c', "Hello")
+> (True, 'c', "Hello") :: (Bool, Char, [Char])
+    </pre>
+    <center>
+    <p>Lists are homogeneous, variable length.</p>
+    <p>Tuples are heterogeneous, fixed length.</p>
+    </center>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Tuple functions</h1></center>
+    <pre language=haskell data-geom=130>
+> > fst (True, 'c')
+> True
+    </pre>
+    <pre language=haskell>
+> > snd (True, 'c')
+> 'c'
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
     <center><h1>Equality</h1></center>
     <pre language=haskell data-geom=100,400>
 > > 1 == 1
