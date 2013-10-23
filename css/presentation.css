@@ -104,8 +104,15 @@ b
 
 .slide a
 {
-  color: #046;
+  color: #04a;
   text-decoration: none;
+}
+
+.slide a:after
+{
+  content: " (" attr(href) ")";
+  font-size: 80%;
+  color: #688;
 }
 
 .slide ul,
