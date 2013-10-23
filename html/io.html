@@ -100,6 +100,21 @@
 
 <div class=slide>
   <div class=body>
+    <center><h1>Return</h1></center>
+    <center>
+     <p data-geom=100>Try running the following:</p>
+    </center>
+    <pre language=haskell data-geom=0,300>
+> f = do
+>   putStrLn "a"
+>   return ()
+>   putStrLn "b"
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
     <center><h1>Control structures - 2</h1></center>
     <center data-geom=100>Define a function that takes a list of IO actions, and performs all of them.</center>
     <hr>
