@@ -68,13 +68,13 @@
 <div class=slide>
   <div class=body>
     <center><h1>Multiple Arguments</h1></center>
-      <pre language=haskell data-geom=100,680>
-> both a b = isUpper a && isUpper b
+      <pre language=haskell data-geom=100,760>
+> isUpper2 a b = isUpper a && isUpper b
       </pre>
       <hr>
-      <pre language=haskell data-geom=,600>
-> > :t both
-> both :: Char -> Char -> Bool
+      <pre language=haskell data-geom=,650>
+> > :t isUpper2
+> isUpper2 :: Char -> Char -> Bool
       </pre>
       <center>Multiple arguments,<br> multiple arrows in type.</center>
   </div>
@@ -83,19 +83,19 @@
 <div class=slide>
   <div class=body>
     <center><h1>Currying</h1></center>
-      <pre language=haskell data-geom=,340>
-> > both 'a' 'X'
+      <pre language=haskell data-geom=,360>
+> > isUpper2 'a' 'X'
 > False
       </pre>
       <hr>
-      <pre language=haskell data-geom=,340>
-> > (both 'a') 'X'
+      <pre language=haskell data-geom=,400>
+> > (isUpper2 'a') 'X'
 > False
       </pre>
       <hr>
-      <pre language=haskell data-geom=,500>
-> > :t both 'a'
-> both 'a' :: Char -> Bool
+      <pre language=haskell data-geom=,560>
+> > :t isUpper2 'a'
+> isUpper2 'a' :: Char -> Bool
       </pre>
   </div>
 </div>
@@ -103,9 +103,9 @@
 <div class=slide>
   <div class=body>
     <center><h1>Currying</h1></center>
-    <pre language=haskell data-geom=120,610>
-> both :: Char ->  Char -> Bool
-> both :: Char -> (Char -> Bool)
+    <pre language=haskell data-geom=120,690>
+> isUpper2 :: Char ->  Char -> Bool
+> isUpper2 :: Char -> (Char -> Bool)
     </pre>
     <center data-geom=80>
     Application associates to the left,<br> function arrows to the right.
@@ -190,14 +190,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Lambda expressions</h1></center>
-      <pre language=haskell data-geom=120,760>
-> both a b = isUpper a && isUpper b
+      <pre language=haskell data-geom=120,830>
+> isUpper2 a b = isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,760>
+      <pre language=haskell data-geom=20,830>
 > ???
       </pre>
-      <pre language=haskell data-geom=20,760>
-> both = \a b -> isUpper a && isUpper b
+      <pre language=haskell data-geom=20,830>
+> isUpper2 = \a b -> isUpper a && isUpper b
       </pre>
   </div>
 </div>
@@ -205,14 +205,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Lambda expressions</h1></center>
-      <pre language=haskell data-geom=120,760>
-> both a b = isUpper a && isUpper b
+      <pre language=haskell data-geom=120,830>
+> isUpper2 a b = isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,760>
-> both a = \b -> isUpper a && isUpper b
+      <pre language=haskell data-geom=20,830>
+> isUpper2 a = \b -> isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,760>
-> both = \a b -> isUpper a && isUpper b
+      <pre language=haskell data-geom=20,830>
+> isUpper2 = \a b -> isUpper a && isUpper b
       </pre>
       <center>All equivalent.</center>
   </div>
@@ -243,34 +243,11 @@
 <div class=slide>
   <div class=body>
     <center><h1>Just functions</h1></center>
-      <pre language=haskell data-geom=140,560>
-> (&&) :: Bool -> Bool -> Bool
-> (&&) True  True  = True
-> (&&) False True  = False
-> (&&) True  False = False
-> (&&) False False = False
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Just functions</h1></center>
-      <pre language=haskell data-geom=140,560>
-> (&&) :: Bool -> Bool -> Bool
-> (&&) True  True  = True
-> (&&) _     _     = False
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Implementation</h1></center>
-      <pre language=haskell data-geom=140,560>
-> (&&) :: Bool -> Bool -> Bool
-> True && True = True
-> _    && _    = False
+      <pre language=haskell data-geom=140,600>
+> -- Or own XOR operator:
+>
+> (^) :: Bool -> Bool -> Bool
+> p ^ q = (p || q) && !(p && q)
       </pre>
   </div>
 </div>
