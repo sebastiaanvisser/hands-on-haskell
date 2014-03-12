@@ -49,11 +49,21 @@
 <div class=slide>
   <div class=body>
     <center><h1>Record Types</h1></center>
-      <pre language=haskell data-geom=80,470>
+    <pre language=haskell data-geom=80,470>
 > data Person = Person
 >   { name :: Name
 >   , age  :: Int
 >   } deriving Show
+    </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Creation and projection</h1></center>
+      <pre language=haskell data-geom=,740>
+> > Person { name = "Alice", age = 25 }
+> Person {name = "Alice", age = 25}
       </pre>
       <hr>
       <pre language=haskell data-geom=,500>
@@ -61,6 +71,21 @@
 > name :: Person -> String
 > > :t age
 > age :: Person -> Int
+      </pre>
+  </div>
+</div>
+
+<div class=slide>
+  <div class=body>
+    <center><h1>Updating records</h1></center>
+      <pre language=haskell data-geom=100,760>
+> > let alice = Person { name = "Alice"
+>                      , age  = 25
+>                      }
+      </pre>
+      <pre language=haskell data-geom=,660>
+> > alice { age = 26 }
+> Person {name = "Alice", age = 26}
       </pre>
   </div>
 </div>
