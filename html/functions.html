@@ -9,13 +9,13 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell data-geom=100,690>
-> upper c = (c >= 'A') && (c <= 'Z')
+      <pre language=haskell data-geom=100,730>
+> isUpper c = (c >= 'A') && (c <= 'Z')
       </pre>
       <hr>
-      <pre language=haskell data-geom=,440>
-> > :t upper
-> upper :: Char -> Bool
+      <pre language=haskell data-geom=,480>
+> > :t isUpper
+> isUpper :: Char -> Bool
       </pre>
       <center>Character as input,<br> boolean as output.</center>
   </div>
@@ -24,9 +24,9 @@
 <div class=slide>
   <div class=body>
     <center><h1>Functions</h1></center>
-      <pre language=haskell data-geom=100,690>
-> upper :: Char -> Bool
-> upper c = (c >= 'A') && (c <= 'Z')
+      <pre language=haskell data-geom=100,730>
+> isUpper :: Char -> Bool
+> isUpper c = (c >= 'A') && (c <= 'Z')
       </pre>
       <hr>
       <center data-geom=80>Type signature is optional,<br>but recommended.</center>
@@ -36,8 +36,8 @@
 <div class=slide>
   <div class=body>
     <center><h1>Function Application</h1></center>
-      <pre language=haskell data-geom=100,240>
-> > upper 'a'
+      <pre language=haskell data-geom=100,280>
+> > isUpper 'a'
 > False
       </pre>
       <center>Just use a space!</center>
@@ -68,8 +68,8 @@
 <div class=slide>
   <div class=body>
     <center><h1>Multiple Arguments</h1></center>
-      <pre language=haskell data-geom=100,580>
-> both a b = upper a && upper b
+      <pre language=haskell data-geom=100,680>
+> both a b = isUpper a && isUpper b
       </pre>
       <hr>
       <pre language=haskell data-geom=,600>
@@ -190,14 +190,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Lambda expressions</h1></center>
-      <pre language=haskell data-geom=120,670>
-> both a b = upper a && upper b
+      <pre language=haskell data-geom=120,760>
+> both a b = isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,670>
+      <pre language=haskell data-geom=20,760>
 > ???
       </pre>
-      <pre language=haskell data-geom=20,670>
-> both = \a b -> upper a && upper b
+      <pre language=haskell data-geom=20,760>
+> both = \a b -> isUpper a && isUpper b
       </pre>
   </div>
 </div>
@@ -205,14 +205,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Lambda expressions</h1></center>
-      <pre language=haskell data-geom=120,670>
-> both a b = upper a && upper b
+      <pre language=haskell data-geom=120,760>
+> both a b = isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,670>
-> both a = \b -> upper a && upper b
+      <pre language=haskell data-geom=20,760>
+> both a = \b -> isUpper a && isUpper b
       </pre>
-      <pre language=haskell data-geom=20,670>
-> both = \a b -> upper a && upper b
+      <pre language=haskell data-geom=20,760>
+> both = \a b -> isUpper a && isUpper b
       </pre>
       <center>All equivalent.</center>
   </div>
@@ -327,7 +327,7 @@
   <div class=body>
     <center><h1>Functions are values</h1></center>
       <pre id=infix1 language=haskell data-geom=60,460>
-> funs = [ upper
+> funs = [ isUpper
 >        , (== 'a')
 >        , (`elem` "xyz")
 >        ]
@@ -486,13 +486,13 @@
 <div class=slide>
   <div class=body>
     <center><h1>Specialization</h1></center>
-      <pre language=haskell data-geom=80,740>
-> upper :: Char -> Bool
+      <pre language=haskell data-geom=80,800>
+> isUpper :: Char -> Bool
 > twice :: (a -> b) -> a -> a -> (b, b)
       </pre>
-      <pre language=haskell data-geom=40,860>
-> > :t twice upper
-> twice upper :: ???
+      <pre language=haskell data-geom=40,800>
+> > :t twice isUpper
+> twice isUpper :: ???
       </pre>
       <center data-geom=80>Q: What is the type?</center>
   </div>
@@ -501,13 +501,14 @@
 <div class=slide>
   <div class=body>
     <center><h1>Specialization</h1></center>
-      <pre language=haskell data-geom=80,740>
-> upper :: Char -> Bool
+      <pre language=haskell data-geom=80,800>
+> isUpper :: Char -> Bool
 > twice :: (a -> b) -> a -> a -> (b, b)
       </pre>
-      <pre language=haskell data-geom=40,860>
-> > :t twice upper
-> twice upper :: Char -> Char -> (Bool, Bool)
+      <pre language=haskell data-geom=40,800>
+> > :t twice isUpper
+> twice isUpper ::
+>            Char -> Char -> (Bool, Bool)
       </pre>
       <center data-geom=80>Q: What is the type?</center>
   </div>
