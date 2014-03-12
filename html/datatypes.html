@@ -244,75 +244,6 @@
 
 <div class=slide>
   <div class=body>
-    <center><h1>Generalizing list functions</h1></center>
-      <pre language=haskell data-geom=20,540>
-> and [] = True
-> or  [] = False
-      </pre>
-      <pre language=haskell data-geom=-35,540>
-> and (x:xs) = x && and xs
-> or  (x:xs) = x || or  xs
-      </pre>
-      <hr>
-      <center>Combine function <code>f</code> + default case <code>d</code>:</center>
-      <pre language=haskell data-geom=,670>
-> gen _ d []     = d
-> gen f d (x:xs) = x `f` gen f d xs
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>Generalizing list functions</h1></center>
-      <pre language=haskell data-geom=80,790>
-> foldr :: (a -> b -> b) -> b -> [a] -> b
-> foldr _ d []     = d
-> foldr f d (x:xs) = f x (foldr f d xs)
-      </pre>
-      <hr>
-      <pre language=haskell data-geom=80,540>
-> and, or :: [Bool] -> Bool
-> and = foldr (&&) True
-> or  = foldr (||) False
-      </pre>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>More folds</h1></center>
-      <pre language=haskell data-geom=40,780>
-> and      = foldr (&&) True
-> or       = foldr (||) False
-> sum      = foldr ...
-> product  = foldr ...
-> concat   = foldr ...
-> identity = foldr ...
-> reverse  = foldr ...
-      </pre>
-      <center>Q: Can you implement these as folds?</center>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
-    <center><h1>More folds</h1></center>
-      <pre language=haskell data-geom=40,780>
-> and      = foldr (&&) True
-> or       = foldr (||) False
-> sum      = foldr (+) 0
-> product  = foldr (*) 1
-> concat   = foldr (++) []
-> identity = foldr (:) []
-> reverse  = foldr (\a b -> b ++ [a]) []
-      </pre>
-      <center>And many more!</center>
-  </div>
-</div>
-
-<div class=slide>
-  <div class=body>
     <center><h1>List Functions</h1></center>
       <pre language=haskell data-geom=80,580>
 > map :: (a -> b) -> [a] -> [b]
@@ -323,7 +254,6 @@
       <pre language=haskell data-geom=40,65>
 > ???
       </pre>
-      <center>Either use direct recursion,<br> or use <code>foldr</code>.<center>
   </div>
 </div>
 
@@ -335,9 +265,6 @@
 > map f (x:xs) = f x : map f xs
       </pre>
       <hr>
-      <pre language=haskell data-geom=60,740>
-> map f = foldr (\a b -> f a : b) []
-      </pre>
   </div>
 </div>
 
@@ -352,12 +279,6 @@
 >   else filter p xs
       </pre>
       <hr>
-      <pre language=haskell data-geom=0,740>
-> filter p = foldr step []
->   where step a b = if p a
->                    then a : b
->                    else b
-      </pre>
   </div>
 </div>
 
